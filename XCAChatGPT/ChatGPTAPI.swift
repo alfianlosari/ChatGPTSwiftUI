@@ -49,7 +49,7 @@ class ChatGPTAPI {
     
     private func jsonBody(text: String, stream: Bool = true) throws -> Data {
         let jsonBody: [String: Any] = [
-            "model": "text-chat-davinci-002-20230126",
+            "model": "text-chat-davinci-002-20221122",
             "temperature": 0.5,
             "max_tokens": 1024,
             "prompt": generateChatGPTPrompt(from: text),
