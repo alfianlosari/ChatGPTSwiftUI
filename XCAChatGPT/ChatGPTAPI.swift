@@ -125,7 +125,14 @@ class ChatGPTAPI {
 }
 
 
-extension String: Error {}
+extension String: CustomNSError {
+    
+    public var errorUserInfo: [String : Any] {
+        [
+            NSLocalizedDescriptionKey: self
+        ]
+    }
+}
 
 struct CompletionResponse: Decodable {
     let choices: [Choice]
