@@ -4,7 +4,7 @@
 
 This is a mobile native iOS Application for interacting with ChatGPT built using SwiftUI and OpenAPI API. It used the leaked model and special prompt to access ChatGPT using Open AI Completions API endpoint.
 
-UPDATE 3 - 4 Feb 2023
+## UPDATE 3 - 4 Feb 2023
 Update to a much shorter prompt for triggering ChatGPT
 
 ## UPDATE 2 - 3 Feb 2023
