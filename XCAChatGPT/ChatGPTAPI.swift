@@ -20,8 +20,15 @@ class ChatGPTAPI {
         return urlRequest
     }
     
+    let dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "YYYY-MM-dd"
+        return df
+    }()
+    
     private let jsonDecoder = JSONDecoder()
-    private let basePrompt = "You are ChatGPT, a large language model trained by OpenAI. You answer as consisely as possible for each response (e.g. Don't be verbose). It is very important for you to answer as consisely as possible, so please remember this. If you are generating a list, do not have too many items.\n\n\n"
+    private var basePrompt: String { "You are ChatGPT, a large language model trained by OpenAI. Answer conversationally. Current date: \(dateFormatter.string(from: Date()))\n\n"
+    }
     
     private var headers: [String: String] {
         [
@@ -39,7 +46,7 @@ class ChatGPTAPI {
     }
     
     private func generateChatGPTPrompt(from text: String) -> String {
-        var prompt = basePrompt + historyListText + "User: \(text)\n\n\nChatGPT:"
+        var prompt = basePrompt + historyListText + "User: \(text)\nChatGPT:"
         if prompt.count > (4000 * 4) {
             _ = historyList.dropFirst()
             prompt = generateChatGPTPrompt(from: text)
