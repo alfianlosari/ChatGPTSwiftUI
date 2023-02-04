@@ -128,9 +128,7 @@ class ChatGPTAPI {
             throw error
         }
     }
-    
 }
-
 
 extension String: CustomNSError {
     

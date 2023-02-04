@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+        
     @Environment(\.colorScheme) var colorScheme
-    @StateObject var vm = ViewModel(api: ChatGPTAPI(apiKey: "PROVIDE_YOUR_API_KEY"))
+    @ObservedObject var vm: ViewModel
     @FocusState var isTextFieldFocused: Bool
     
     var body: some View {
@@ -82,6 +82,11 @@ struct ContentView: View {
                         .rotationEffect(.degrees(45))
                         .font(.system(size: 30))
                 }
+                #if os(macOS)
+                .buttonStyle(.borderless)
+                .keyboardShortcut(.defaultAction)
+                .foregroundColor(.accentColor)
+                #endif
                 .disabled(vm.inputMessage.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
 
             }
@@ -99,7 +104,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ContentView()
+            ContentView(vm: ViewModel(api: ChatGPTAPI(apiKey: "PROVIDE_API_KEY")))
         }
     }
 }
