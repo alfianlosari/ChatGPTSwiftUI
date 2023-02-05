@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct XCAChatGPTMacApp: App {
     
-    @StateObject var vm = ViewModel(api: ChatGPTAPI(apiKey: "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"))
+    @StateObject var vm = ViewModel(api: ChatGPTAPI(apiKey: "API_KEY"))
     
     var body: some Scene {
         MenuBarExtra("XCA ChatGPT", image: "icon") {
