@@ -1,4 +1,4 @@
-# ChatGPT SwiftUI iOS App
+# ChatGPT SwiftUI iOS & macOS App
 
 ![Alt text](https://imagizer.imageshack.com/v2/640x480q90/922/hmlopw.png "image")
 
@@ -9,6 +9,8 @@ you can add dependency for [ChatGPTSwift](https://github.com/alfianlosari/ChatGP
 
 ## UPDATE 4 - 5 Feb 2023
 Add separate target for macOS Menu Bar App
+
+![Alt text](https://imagizer.imageshack.com/v2/640x480q90/923/CufOj0.png "image")
 
 ## UPDATE 3 - 4 Feb 2023
 Update to a much shorter prompt for triggering ChatGPT
