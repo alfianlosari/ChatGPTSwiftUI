@@ -36,9 +36,11 @@ struct ContentView: View {
                     }
                 }
                 
+                #if !os(watchOS)
                 Divider()
                 bottomView(image: "profile", proxy: proxy)
                 Spacer()
+                #endif
             }
             .onChange(of: vm.messages.last?.responseText) { _ in  scrollToBottom(proxy: proxy)
             }
@@ -64,7 +66,9 @@ struct ContentView: View {
             }
             
             TextField("Send message", text: $vm.inputMessage, axis: .vertical)
+                #if !os(watchOS)
                 .textFieldStyle(.roundedBorder)
+                #endif
                 .focused($isTextFieldFocused)
                 .disabled(vm.isInteractingWithChatGPT)
             
