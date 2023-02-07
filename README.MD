@@ -7,6 +7,12 @@ This is a mobile native iOS Application for interacting with ChatGPT built using
 ## Separate SPM repo for API only
 you can add dependency for [ChatGPTSwift](https://github.com/alfianlosari/ChatGPTSwift) to access the API only if you want to integrate into your own app
 
+## UPDATE 4 - 7 Feb 2023
+
+Add separate target for watchOS independent App
+
+![Alt text](https://imagizer.imageshack.com/v2/640x480q90/923/Hk89yV.png "image")
+
 ## UPDATE 4 - 5 Feb 2023
 Add separate target for macOS Menu Bar App
 
@@ -24,6 +30,7 @@ At the time this video is published, the leaked model to access ChatGPT using Co
 ## Video tutorial
 - [iOS YouTube](https://youtu.be/PLEgTCT20zU)
 - [macOS YouTube](https://youtu.be/Wl1cDvwpJoE)
+- [watchOS YouTube](https://youtu.be/DwXy0gKz1GY)
 
 ## Requierements
 - Xcode 14 
