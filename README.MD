@@ -1,4 +1,4 @@
-# ChatGPT SwiftUI iOS & macOS App
+# ChatGPT SwiftUI iOS, macOS, watchOS App
 
 ![Alt text](https://imagizer.imageshack.com/v2/640x480q90/922/hmlopw.png "image")
 
