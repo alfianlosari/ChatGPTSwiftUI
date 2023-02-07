@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import AVKit
 
 class ViewModel: ObservableObject {
     
@@ -14,10 +15,15 @@ class ViewModel: ObservableObject {
     @Published var messages: [MessageRow] = []
     @Published var inputMessage: String = ""
     
+    private var synthesizer: AVSpeechSynthesizer?
+    
     private let api: ChatGPTAPI
     
-    init(api: ChatGPTAPI) {
+    init(api: ChatGPTAPI, enableSpeech: Bool = false) {
         self.api = api
+        if enableSpeech {
+            synthesizer = .init()
+        }
     }
     
     @MainActor
@@ -29,6 +35,7 @@ class ViewModel: ObservableObject {
     
     @MainActor
     func clearMessages() {
+        stopSpeaking()
         withAnimation { [weak self] in
             self?.messages = []
         }
@@ -71,6 +78,25 @@ class ViewModel: ObservableObject {
         messageRow.isInteractingWithChatGPT = false
         self.messages[self.messages.count - 1] = messageRow
         isInteractingWithChatGPT = false
+        speakLastResponse()
+        
+    }
+    
+    func speakLastResponse() {
+        guard let synthesizer, let responseText = self.messages.last?.responseText, !responseText.isEmpty else {
+            return
+        }
+        stopSpeaking()
+        let utterance = AVSpeechUtterance(string: responseText)
+        utterance.voice = .init(language: "en-US")
+        utterance.rate = 0.5
+        utterance.pitchMultiplier = 0.8
+        utterance.postUtteranceDelay = 0.2
+        synthesizer.speak(utterance )
+    }
+    
+    func stopSpeaking() {
+        synthesizer?.stopSpeaking(at: .immediate)
     }
     
 }

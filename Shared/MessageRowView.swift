@@ -13,6 +13,16 @@ struct MessageRowView: View {
     let message: MessageRow
     let retryCallback: (MessageRow) -> Void
     
+    var imageSize: CGSize {
+        #if os(iOS) || os(macOS)
+        CGSize(width: 25, height: 25)
+        #elseif os(watchOS)
+        CGSize(width: 20, height: 20)
+        #else
+        CGSize(width: 80, height: 80)
+        #endif
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             messageRow(text: message.sendText, image: message.sendImage, bgColor: colorScheme == .light ? .white : Color(red: 52/255, green: 53/255, blue: 65/255, opacity: 0.5))
@@ -34,12 +44,15 @@ struct MessageRowView: View {
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(bgColor)
-        
         #else
         HStack(alignment: .top, spacing: 24) {
             messageRowContent(text: text, image: image, responseError: responseError, showDotLoading: showDotLoading)
         }
+        #if os(tvOS)
+        .padding(32)
+        #else
         .padding(16)
+        #endif
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(bgColor)
         #endif
@@ -51,7 +64,7 @@ struct MessageRowView: View {
             AsyncImage(url: url) { image in
                 image
                     .resizable()
-                    .frame(width: 25, height: 25)
+                    .frame(width: imageSize.width, height: imageSize.height)
             } placeholder: {
                 ProgressView()
             }
@@ -59,16 +72,20 @@ struct MessageRowView: View {
         } else {
             Image(image)
                 .resizable()
-                .frame(width: 25, height: 25)
+                .frame(width: imageSize.width, height: imageSize.height)
         }
         
         VStack(alignment: .leading) {
             if !text.isEmpty {
+                #if os(tvOS)
+                responseTextView(text: text)
+                #else
                 Text(text)
                     .multilineTextAlignment(.leading)
-                    #if !os(watchOS)
+                    #if os(iOS) || os(macOS)
                     .textSelection(.enabled)
                     #endif
+                #endif
             }
             
             if let error = responseError {
@@ -84,13 +101,52 @@ struct MessageRowView: View {
             }
             
             if showDotLoading {
+                #if os(tvOS)
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .padding()
+                #else
                 DotLoadingView()
                     .frame(width: 60, height: 30)
+                #endif
+                
+            }
+        }
+    }
+    
+    #if os(tvOS)
+    private func rowsFor(text: String) -> [String] {
+        var rows = [String]()
+        let maxLinesPerRow = 8
+        var currentRowText = ""
+        var currentLineSum = 0
+        
+        for char in text {
+            currentRowText += String(char)
+            if char == "\n" {
+                currentLineSum += 1
+            }
+            
+            if currentLineSum >= maxLinesPerRow {
+                rows.append(currentRowText)
+                currentLineSum = 0
+                currentRowText = ""
             }
         }
 
-        
+        rows.append(currentRowText)
+        return rows
     }
+    
+    
+    func responseTextView(text: String) -> some View {
+        ForEach(rowsFor(text: text), id: \.self) { text in
+            Text(text)
+                .focusable()
+                .multilineTextAlignment(.leading)
+        }
+    }
+    #endif
     
 }
 

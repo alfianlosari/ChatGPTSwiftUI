@@ -10,8 +10,8 @@ import SwiftUI
 @main
 struct XCAChatGPTWatch_Watch_AppApp: App {
     
-    @StateObject var vm = ViewModel(api: ChatGPTAPI(apiKey: "API_KEY"))
-
+    @StateObject var vm = ViewModel(api: ChatGPTAPI(apiKey: "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"))
+    
     var body: some Scene {
         WindowGroup {
             NavigationStack {
@@ -20,8 +20,8 @@ struct XCAChatGPTWatch_Watch_AppApp: App {
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItemGroup {
-                            VStack {
-                                Button("Send Message") {
+                            HStack {
+                                Button("Send") {
                                     self.presentInputController(withSuggestions: []) { result in
                                         Task { @MainActor in
                                             guard !result.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
@@ -44,7 +44,6 @@ struct XCAChatGPTWatch_Watch_AppApp: App {
         }
     }
 }
-
 
 extension App {
     typealias StringCompletion = (String) -> Void

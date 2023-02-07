@@ -26,6 +26,16 @@
 		8B057608298FA9E900A56C9A /* DotLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C017298ADF4E0079AF26 /* DotLoadingView.swift */; };
 		8B057609298FA9E900A56C9A /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C015298ADC9D0079AF26 /* MessageRow.swift */; };
 		8B05760A298FA9E900A56C9A /* ChatGPTAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C011298AD0CE0079AF26 /* ChatGPTAPI.swift */; };
+		8B057614298FBDB600A56C9A /* XCAChatGPTTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B057613298FBDB600A56C9A /* XCAChatGPTTVApp.swift */; };
+		8B057618298FBDB700A56C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B057617298FBDB700A56C9A /* Assets.xcassets */; };
+		8B05761B298FBDB700A56C9A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B05761A298FBDB700A56C9A /* Preview Assets.xcassets */; };
+		8B05761F298FBE0400A56C9A /* ChatGPTAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C011298AD0CE0079AF26 /* ChatGPTAPI.swift */; };
+		8B057620298FBE0400A56C9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C005298AD09E0079AF26 /* ContentView.swift */; };
+		8B057621298FBE0400A56C9A /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C015298ADC9D0079AF26 /* MessageRow.swift */; };
+		8B057622298FBE0400A56C9A /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C019298ADF7F0079AF26 /* MessageRowView.swift */; };
+		8B057623298FBE0400A56C9A /* DotLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C017298ADF4E0079AF26 /* DotLoadingView.swift */; };
+		8B057624298FBE0400A56C9A /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C013298ADC560079AF26 /* ViewModel.swift */; };
+		8B05764829909A9200A56C9A /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B05764729909A9200A56C9A /* ScrollView.swift */; };
 		8B91C004298AD09E0079AF26 /* XCAChatGPTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C003298AD09E0079AF26 /* XCAChatGPTApp.swift */; };
 		8B91C006298AD09E0079AF26 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C005298AD09E0079AF26 /* ContentView.swift */; };
 		8B91C008298AD09F0079AF26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B91C007298AD09F0079AF26 /* Assets.xcassets */; };
@@ -72,6 +82,11 @@
 		8B0575F5298FA9D800A56C9A /* XCAChatGPTWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCAChatGPTWatchApp.swift; sourceTree = "<group>"; };
 		8B0575F9298FA9DA00A56C9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B0575FC298FA9DA00A56C9A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8B057611298FBDB600A56C9A /* XCAChatGPTTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XCAChatGPTTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B057613298FBDB600A56C9A /* XCAChatGPTTVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCAChatGPTTVApp.swift; sourceTree = "<group>"; };
+		8B057617298FBDB700A56C9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8B05761A298FBDB700A56C9A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8B05764729909A9200A56C9A /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
 		8B91C000298AD09E0079AF26 /* XCAChatGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XCAChatGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B91C003298AD09E0079AF26 /* XCAChatGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCAChatGPTApp.swift; sourceTree = "<group>"; };
 		8B91C005298AD09E0079AF26 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,6 +108,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8B0575ED298FA9D800A56C9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B05760E298FBDB600A56C9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -159,6 +181,25 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		8B057612298FBDB600A56C9A /* XCAChatGPTTV */ = {
+			isa = PBXGroup;
+			children = (
+				8B057613298FBDB600A56C9A /* XCAChatGPTTVApp.swift */,
+				8B057617298FBDB700A56C9A /* Assets.xcassets */,
+				8B057619298FBDB700A56C9A /* Preview Content */,
+				8B05764729909A9200A56C9A /* ScrollView.swift */,
+			);
+			path = XCAChatGPTTV;
+			sourceTree = "<group>";
+		};
+		8B057619298FBDB700A56C9A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8B05761A298FBDB700A56C9A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		8B91BFF7298AD09E0079AF26 = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +207,7 @@
 				8B91C002298AD09E0079AF26 /* XCAChatGPT */,
 				8B057583298E52C000A56C9A /* XCAChatGPTMac */,
 				8B0575F4298FA9D800A56C9A /* XCAChatGPTWatch Watch App */,
+				8B057612298FBDB600A56C9A /* XCAChatGPTTV */,
 				8B91C001298AD09E0079AF26 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -177,6 +219,7 @@
 				8B057582298E52C000A56C9A /* XCAChatGPTMac.app */,
 				8B0575EB298FA9D800A56C9A /* XCAChatGPTWatch.app */,
 				8B0575F0298FA9D800A56C9A /* XCAChatGPTWatch Watch App.app */,
+				8B057611298FBDB600A56C9A /* XCAChatGPTTV.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -253,6 +296,23 @@
 			productReference = 8B0575F0298FA9D800A56C9A /* XCAChatGPTWatch Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8B057610298FBDB600A56C9A /* XCAChatGPTTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B05761C298FBDB700A56C9A /* Build configuration list for PBXNativeTarget "XCAChatGPTTV" */;
+			buildPhases = (
+				8B05760D298FBDB600A56C9A /* Sources */,
+				8B05760E298FBDB600A56C9A /* Frameworks */,
+				8B05760F298FBDB600A56C9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = XCAChatGPTTV;
+			productName = XCAChatGPTTV;
+			productReference = 8B057611298FBDB600A56C9A /* XCAChatGPTTV.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8B91BFFF298AD09E0079AF26 /* XCAChatGPT */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B91C00E298AD09F0079AF26 /* Build configuration list for PBXNativeTarget "XCAChatGPT" */;
@@ -289,6 +349,9 @@
 					8B0575EF298FA9D800A56C9A = {
 						CreatedOnToolsVersion = 14.2;
 					};
+					8B057610298FBDB600A56C9A = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					8B91BFFF298AD09E0079AF26 = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -311,6 +374,7 @@
 				8B057581298E52C000A56C9A /* XCAChatGPTMac */,
 				8B0575EA298FA9D800A56C9A /* XCAChatGPTWatch */,
 				8B0575EF298FA9D800A56C9A /* XCAChatGPTWatch Watch App */,
+				8B057610298FBDB600A56C9A /* XCAChatGPTTV */,
 			);
 		};
 /* End PBXProject section */
@@ -338,6 +402,15 @@
 			files = (
 				8B0575FD298FA9DA00A56C9A /* Preview Assets.xcassets in Resources */,
 				8B0575FA298FA9DA00A56C9A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B05760F298FBDB600A56C9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B05761B298FBDB700A56C9A /* Preview Assets.xcassets in Resources */,
+				8B057618298FBDB700A56C9A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +451,21 @@
 				8B05760A298FA9E900A56C9A /* ChatGPTAPI.swift in Sources */,
 				8B057607298FA9E900A56C9A /* ViewModel.swift in Sources */,
 				8B0575F6298FA9D800A56C9A /* XCAChatGPTWatchApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B05760D298FBDB600A56C9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B057621298FBE0400A56C9A /* MessageRow.swift in Sources */,
+				8B057622298FBE0400A56C9A /* MessageRowView.swift in Sources */,
+				8B05761F298FBE0400A56C9A /* ChatGPTAPI.swift in Sources */,
+				8B057623298FBE0400A56C9A /* DotLoadingView.swift in Sources */,
+				8B057614298FBDB600A56C9A /* XCAChatGPTTVApp.swift in Sources */,
+				8B05764829909A9200A56C9A /* ScrollView.swift in Sources */,
+				8B057620298FBE0400A56C9A /* ContentView.swift in Sources */,
+				8B057624298FBE0400A56C9A /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +639,62 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Release;
+		};
+		8B05761D298FBDB700A56C9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"XCAChatGPTTV/Preview Content\"";
+				DEVELOPMENT_TEAM = 5C2XD9H2JS;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alfianlosari.XCAChatGPTTV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 16.1;
+			};
+			name = Debug;
+		};
+		8B05761E298FBDB700A56C9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"XCAChatGPTTV/Preview Content\"";
+				DEVELOPMENT_TEAM = 5C2XD9H2JS;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alfianlosari.XCAChatGPTTV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 16.1;
 			};
 			name = Release;
 		};
@@ -752,6 +896,15 @@
 			buildConfigurations = (
 				8B0575FE298FA9DA00A56C9A /* Debug */,
 				8B0575FF298FA9DA00A56C9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8B05761C298FBDB700A56C9A /* Build configuration list for PBXNativeTarget "XCAChatGPTTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B05761D298FBDB700A56C9A /* Debug */,
+				8B05761E298FBDB700A56C9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

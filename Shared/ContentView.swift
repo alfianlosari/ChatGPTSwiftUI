@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct ContentView: View {
         
@@ -35,8 +36,7 @@ struct ContentView: View {
                         isTextFieldFocused = false
                     }
                 }
-                
-                #if !os(watchOS)
+                #if os(iOS) || os(macOS)
                 Divider()
                 bottomView(image: "profile", proxy: proxy)
                 Spacer()
@@ -66,7 +66,7 @@ struct ContentView: View {
             }
             
             TextField("Send message", text: $vm.inputMessage, axis: .vertical)
-                #if !os(watchOS)
+                #if os(iOS) || os(macOS)
                 .textFieldStyle(.roundedBorder)
                 #endif
                 .focused($isTextFieldFocused)
@@ -92,7 +92,6 @@ struct ContentView: View {
                 .foregroundColor(.accentColor)
                 #endif
                 .disabled(vm.inputMessage.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-
             }
         }
         .padding(.horizontal, 16)
