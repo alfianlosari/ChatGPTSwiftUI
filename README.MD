@@ -5,6 +5,7 @@
 This is a mobile native iOS Application for interacting with ChatGPT built using SwiftUI and OpenAPI API. It used the leaked model and special prompt to access ChatGPT using Open AI Completions API endpoint.
 
 ## DISCLAIMERS!
+The `ChatGPTAPI.swift` is updated frequently when new model is found. Expect breaking changes. Always read readme before updating or opening an issue.
 
 Use this at your own risk, there is a possibility that OpenAI might ban your account using this approach! I don't take any responsibility.
 
