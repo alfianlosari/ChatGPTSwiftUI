@@ -1,8 +1,8 @@
-# ChatGPT SwiftUI iOS, macOS, watchOS App
+# ChatGPT SwiftUI iOS, macOS, watchOS, tvOS App
 
 ![Alt text](https://imagizer.imageshack.com/v2/640x480q90/922/hmlopw.png "image")
 
-This is a mobile native iOS Application for interacting with ChatGPT built using SwiftUI and OpenAPI API. It used the leaked model and special prompt to access ChatGPT using Open AI Completions API endpoint.
+This is a native iOS, macOS, watchOS, tvOS App for interacting with ChatGPT built using SwiftUI and OpenAPI API. It used the leaked model and special prompt to access ChatGPT using Open AI Completions API endpoint.
 
 ## DISCLAIMERS!
 The `ChatGPTAPI.swift` is updated frequently when new model is found. Expect breaking changes. Always read readme before updating or opening an issue.
@@ -11,6 +11,12 @@ Use this at your own risk, there is a possibility that OpenAI might ban your acc
 
 ## Separate SPM repo for API only
 you can add dependency for [ChatGPTSwift](https://github.com/alfianlosari/ChatGPTSwift) to access the API only if you want to integrate into your own app
+
+## UPDATE 6 - 9 Feb 2023
+
+Add separate target for tvOS App
+
+![Alt text](https://imagizer.imageshack.com/v2/640x480q90/924/3cnQLj.png "image")
 
 ## UPDATE 5 - 8 Feb 2023
 The leaked model had been removed by OpenAI. Until a new model is found, i'll use the default `text-davinci-003`
@@ -39,6 +45,7 @@ At the time this video is published, the leaked model to access ChatGPT using Co
 - [iOS YouTube](https://youtu.be/PLEgTCT20zU)
 - [macOS YouTube](https://youtu.be/Wl1cDvwpJoE)
 - [watchOS YouTube](https://youtu.be/DwXy0gKz1GY)
+- [tvOS YouTube](https://youtu.be/7RQHG7GXJ_U)
 
 ## Requierements
 - Xcode 14 
