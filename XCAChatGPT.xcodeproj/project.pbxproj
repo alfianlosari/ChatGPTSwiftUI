@@ -113,6 +113,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2A78AC042994F32D00E7ED8F /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SampleCode.xcconfig; sourceTree = "<group>"; };
 		8B057582298E52C000A56C9A /* XCAChatGPTMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XCAChatGPTMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B057584298E52C000A56C9A /* XCAChatGPTMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCAChatGPTMacApp.swift; sourceTree = "<group>"; };
 		8B057588298E52C000A56C9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -192,6 +193,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A78AC052994F34100E7ED8F /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				2A78AC042994F32D00E7ED8F /* SampleCode.xcconfig */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		8B057583298E52C000A56C9A /* XCAChatGPTMac */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +303,7 @@
 				8B057583298E52C000A56C9A /* XCAChatGPTMac */,
 				8B0575F4298FA9D800A56C9A /* XCAChatGPTWatch Watch App */,
 				8B057612298FBDB600A56C9A /* XCAChatGPTTV */,
+				2A78AC052994F34100E7ED8F /* Configuration */,
 				8B91C001298AD09E0079AF26 /* Products */,
 				8B75A1B22A2CB7CE00E8810E /* Frameworks */,
 			);
