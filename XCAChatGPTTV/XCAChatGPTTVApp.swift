@@ -59,7 +59,6 @@ struct XCAChatGPTTVApp: App {
                             .progressViewStyle(.circular)
                             .padding()
                             .opacity(vm.isInteractingWithChatGPT ? 1 : 0)
-                        
                     }
                 }
             }
