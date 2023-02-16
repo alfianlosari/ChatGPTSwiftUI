@@ -107,7 +107,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ContentView(vm: ViewModel(api: ChatGPTAPI(apiKey: "PROVIDE_API_KEY")))
+            ContentView(vm: ViewModel(api: ChatGPTAPI()))
         }
     }
 }

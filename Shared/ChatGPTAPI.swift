@@ -8,8 +8,10 @@
 import Foundation
 
 class ChatGPTAPI {
-    
-    private let apiKey: String
+
+    /// The API key from OpenAI[https://openai.com]
+    private let apiKey: String = "<#OpenAI-API-KEY#>"
+
     private var historyList = [String]()
     private let urlSession = URLSession.shared
     private var urlRequest: URLRequest {
@@ -43,10 +45,6 @@ class ChatGPTAPI {
     
     private var historyListText: String {
         historyList.joined()
-    }
-    
-    init(apiKey: String) {
-        self.apiKey = apiKey
     }
     
     private func generateChatGPTPrompt(from text: String) -> String {
