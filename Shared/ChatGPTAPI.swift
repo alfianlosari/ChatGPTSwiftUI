@@ -7,13 +7,17 @@
 
 import Foundation
 
-class ChatGPTAPI {
+class ChatGPTAPI: @unchecked Sendable {
+    
+    private let systemMessage: Message
+    private let temperature: Double
+    private let model: String
     
     private let apiKey: String
-    private var historyList = [String]()
+    private var historyList = [Message]()
     private let urlSession = URLSession.shared
     private var urlRequest: URLRequest {
-        let url = URL(string: "https://api.openai.com/v1/completions")!
+        let url = URL(string: "https://api.openai.com/v1/chat/completions")!
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         headers.forEach {  urlRequest.setValue($1, forHTTPHeaderField: $0) }
@@ -26,13 +30,11 @@ class ChatGPTAPI {
         return df
     }()
     
-    private let jsonDecoder = JSONDecoder()
-    private var basePrompt: String {
-        "You are ChatGPT, a large language model trained by OpenAI. Respond conversationally. Do not answer as the user. Current date: \(dateFormatter.string(from: Date()))"
-        + "\n\n"
-        + "User: Hello\n"
-        + "ChatGPT: Hello! How can I help you today? <|im_end|>\n\n\n"
-    }
+    private let jsonDecoder: JSONDecoder = {
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        return jsonDecoder
+    }()
     
     private var headers: [String: String] {
         [
@@ -41,40 +43,33 @@ class ChatGPTAPI {
         ]
     }
     
-    private var historyListText: String {
-        historyList.joined()
-    }
-    
-    init(apiKey: String) {
+
+    init(apiKey: String, model: String = "gpt-3.5-turbo", systemPrompt: String = "You are a helpful assistant", temperature: Double = 0.5) {
         self.apiKey = apiKey
+        self.model = model
+        self.systemMessage = .init(role: "system", content: systemPrompt)
+        self.temperature = temperature
     }
     
-    private func generateChatGPTPrompt(from text: String) -> String {
-        var prompt = basePrompt + historyListText + "User: \(text)\nChatGPT:"
-        if prompt.count > (4000 * 4) {
+    private func generateMessages(from text: String) -> [Message] {
+        var messages = [systemMessage] + historyList + [Message(role: "user", content: text)]
+        
+        if messages.contentCount > (4000 * 4) {
             _ = historyList.dropFirst()
-            prompt = generateChatGPTPrompt(from: text)
+            messages = generateMessages(from: text)
         }
-        return prompt
+        return messages
     }
     
     private func jsonBody(text: String, stream: Bool = true) throws -> Data {
-        let jsonBody: [String: Any] = [
-            "model": "text-davinci-003",
-            "temperature": 0.5,
-            "max_tokens": 1024,
-            "prompt": generateChatGPTPrompt(from: text),
-            "stop": [
-                "\n\n\n",
-                "<|im_end|>"
-            ],
-            "stream": stream
-        ]
-        return try JSONSerialization.data(withJSONObject: jsonBody)
+        let request = Request(model: model, temperature: temperature,
+                              messages: generateMessages(from: text), stream: stream)
+        return try JSONEncoder().encode(request)
     }
     
     private func appendToHistoryList(userText: String, responseText: String) {
-        self.historyList.append("User: \(userText)\n\n\nChatGPT: \(responseText)<|im_end|>\n")
+        self.historyList.append(.init(role: "user", content: userText))
+        self.historyList.append(.init(role: "assistant", content: responseText))
     }
     
     func sendMessageStream(text: String) async throws -> AsyncThrowingStream<String, Error> {
@@ -88,18 +83,28 @@ class ChatGPTAPI {
         }
         
         guard 200...299 ~= httpResponse.statusCode else {
-            throw "Bad Response: \(httpResponse.statusCode)"
+            var errorText = ""
+            for try await line in result.lines {
+                errorText += line
+            }
+            
+            if let data = errorText.data(using: .utf8), let errorResponse = try? jsonDecoder.decode(ErrorRootResponse.self, from: data).error {
+                errorText = "\n\(errorResponse.message)"
+            }
+            
+            throw "Bad Response: \(httpResponse.statusCode), \(errorText)"
         }
         
         return AsyncThrowingStream<String, Error> { continuation in
-            Task(priority: .userInitiated) {
+            Task(priority: .userInitiated) { [weak self] in
+                guard let self else { return }
                 do {
                     var responseText = ""
                     for try await line in result.lines {
                         if line.hasPrefix("data: "),
                            let data = line.dropFirst(6).data(using: .utf8),
-                           let response = try? self.jsonDecoder.decode(CompletionResponse.self, from: data),
-                           let text = response.choices.first?.text {
+                           let response = try? self.jsonDecoder.decode(StreamCompletionResponse.self, from: data),
+                           let text = response.choices.first?.delta.content {
                             responseText += text
                             continuation.yield(text)
                         }
@@ -124,17 +129,25 @@ class ChatGPTAPI {
         }
         
         guard 200...299 ~= httpResponse.statusCode else {
-            throw "Bad Response: \(httpResponse.statusCode)"
+            var error = "Bad Response: \(httpResponse.statusCode)"
+            if let errorResponse = try? jsonDecoder.decode(ErrorRootResponse.self, from: data).error {
+                error.append("\n\(errorResponse.message)")
+            }
+            throw error
         }
         
         do {
             let completionResponse = try self.jsonDecoder.decode(CompletionResponse.self, from: data)
-            let responseText = completionResponse.choices.first?.text ?? ""
+            let responseText = completionResponse.choices.first?.message.content ?? ""
             self.appendToHistoryList(userText: text, responseText: responseText)
             return responseText
         } catch {
             throw error
         }
+    }
+    
+    func deleteHistoryList() {
+        self.historyList.removeAll()
     }
 }
 
@@ -147,10 +160,4 @@ extension String: CustomNSError {
     }
 }
 
-struct CompletionResponse: Decodable {
-    let choices: [Choice]
-}
 
-struct Choice: Decodable {
-    let text: String
-}

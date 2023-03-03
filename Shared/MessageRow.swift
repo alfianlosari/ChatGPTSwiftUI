@@ -17,7 +17,7 @@ struct MessageRow: Identifiable {
     let sendText: String
     
     let responseImage: String
-    var responseText: String
+    var responseText: String?
     
     var responseError: String?
     

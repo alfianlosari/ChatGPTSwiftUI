@@ -16,6 +16,14 @@ struct XCAChatGPTApp: App {
         WindowGroup {
             NavigationStack {
                 ContentView(vm: vm)
+                    .toolbar {
+                        ToolbarItem {
+                            Button("Clear") {
+                                vm.clearMessages()
+                            }
+                            .disabled(vm.isInteractingWithChatGPT)
+                        }
+                    }
             }
         }
     }
