@@ -16,7 +16,9 @@ struct ContentView: View {
     
     var body: some View {
         chatListView
-            .navigationTitle("XCA ChatGPT")
+        #if os(watchOS)
+            .navigationTitle("ChatGPT")
+        #endif
     }
     
     var chatListView: some View {
@@ -36,11 +38,14 @@ struct ContentView: View {
                         isTextFieldFocused = false
                     }
                 }
+                .onTapGesture {
+                    isTextFieldFocused = false
+                }
                 #if os(iOS) || os(macOS)
                 Divider()
                 bottomView(image: "profile", proxy: proxy)
-                Spacer()
                 #endif
+                Spacer()
             }
             .onChange(of: vm.messages.last?.responseText) { _ in  scrollToBottom(proxy: proxy)
             }
@@ -62,10 +67,10 @@ struct ContentView: View {
             } else {
                 Image(image)
                     .resizable()
-                    .frame(width: 30, height: 30)
+                    .frame(width: 23, height: 23)
             }
             
-            TextField("Send message", text: $vm.inputMessage, axis: .vertical)
+            TextField("Send request", text: $vm.inputMessage, axis: .vertical)
                 #if os(iOS) || os(macOS)
                 .textFieldStyle(.roundedBorder)
                 #endif
@@ -84,7 +89,7 @@ struct ContentView: View {
                 } label: {
                     Image(systemName: "paperplane.circle.fill")
                         .rotationEffect(.degrees(45))
-                        .font(.system(size: 30))
+                        .font(.system(size: 20))
                 }
                 #if os(macOS)
                 .buttonStyle(.borderless)
@@ -107,7 +112,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ContentView(vm: ViewModel(api: ChatGPTAPI(apiKey: "PROVIDE_API_KEY")))
+            ContentView(vm: ViewModel(api: ChatGPTAPI()))
         }
     }
 }

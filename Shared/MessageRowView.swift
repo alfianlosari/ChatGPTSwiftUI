@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import MarkdownUI
+//import Splash
 
 struct MessageRowView: View {
     
@@ -22,6 +24,16 @@ struct MessageRowView: View {
         CGSize(width: 80, height: 80)
         #endif
     }
+    
+//    private var theme: Splash.Theme {
+//        // NOTE: We are ignoring the Splash theme font
+//        switch self.colorScheme {
+//        case .dark:
+//          return .wwdc17(withFont: .init(size: 16))
+//        default:
+//          return .sunset(withFont: .init(size: 16))
+//        }
+//    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -80,11 +92,18 @@ struct MessageRowView: View {
                 #if os(tvOS)
                 responseTextView(text: text)
                 #else
-                Text(text)
+                Markdown(MarkdownContent(text))
                     .multilineTextAlignment(.leading)
                     #if os(iOS) || os(macOS)
                     .textSelection(.enabled)
                     #endif
+                    .markdownTheme(.basic)
+//                    .markdownCodeSyntaxHighlighter(.splash(theme: self.theme))
+//                Text(text)
+//                    .multilineTextAlignment(.leading)
+//                    #if os(iOS) || os(macOS)
+//                    .textSelection(.enabled)
+//                    #endif
                 #endif
             }
             

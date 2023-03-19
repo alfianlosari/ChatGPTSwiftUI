@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "swift-markdown-ui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gonzalezreal/swift-markdown-ui",
+      "state" : {
+        "revision" : "4392c3cefd08db10f13ffb019d7c7a4a622824f5",
+        "version" : "2.0.2"
+      }
+    }
+  ],
+  "version" : 2
+}

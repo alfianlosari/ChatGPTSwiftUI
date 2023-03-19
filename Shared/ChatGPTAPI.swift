@@ -13,7 +13,7 @@ class ChatGPTAPI: @unchecked Sendable {
     private let temperature: Double
     private let model: String
     
-    private let apiKey: String
+    private let apiKey: String = ChatGPT.apiToken ?? "API_KEY_NOT_SET"
     private var historyList = [Message]()
     private let urlSession = URLSession.shared
     private var urlRequest: URLRequest {
@@ -44,8 +44,7 @@ class ChatGPTAPI: @unchecked Sendable {
     }
     
 
-    init(apiKey: String, model: String = "gpt-3.5-turbo", systemPrompt: String = "You are a helpful assistant", temperature: Double = 0.5) {
-        self.apiKey = apiKey
+    init(model: String = "gpt-3.5-turbo", systemPrompt: String = "You are a helpful assistant", temperature: Double = 0.5) {
         self.model = model
         self.systemMessage = .init(role: "system", content: systemPrompt)
         self.temperature = temperature
