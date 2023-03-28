@@ -55,7 +55,7 @@ class ChatGPTAPI: @unchecked Sendable {
         var messages = [systemMessage] + historyList + [Message(role: "user", content: text)]
         
         if messages.contentCount > (4000 * 4) {
-            _ = historyList.dropFirst()
+            _ = historyList.removeFirst()
             messages = generateMessages(from: text)
         }
         return messages
