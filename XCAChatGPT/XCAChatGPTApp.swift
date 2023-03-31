@@ -11,6 +11,7 @@ import SwiftUI
 struct XCAChatGPTApp: App {
     
     @StateObject var vm = ViewModel(api: ChatGPTAPI(apiKey: "PROVIDE_API_KEY"))
+    @State var isShowingTokenizer = false
     
     var body: some Scene {
         WindowGroup {
@@ -23,8 +24,40 @@ struct XCAChatGPTApp: App {
                             }
                             .disabled(vm.isInteractingWithChatGPT)
                         }
+                        
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button("Tokenizer") {
+                                self.isShowingTokenizer = true
+                            }
+                            .disabled(vm.isInteractingWithChatGPT)
+                        }
                     }
+            }
+            .fullScreenCover(isPresented: $isShowingTokenizer) {
+                NavigationTokenView()
             }
         }
     }
 }
+
+
+struct NavigationTokenView: View {
+    
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        NavigationStack {
+            TokenizerView()
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Close") {
+                            dismiss()
+                        }
+                    }
+                }
+        }
+        .interactiveDismissDisabled()
+    }
+}
+
+

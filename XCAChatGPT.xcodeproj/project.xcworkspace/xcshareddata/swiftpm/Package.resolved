@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "gptencoder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alfianlosari/GPTEncoder.git",
+      "state" : {
+        "revision" : "8d2057a7073fdbf8fb3ac7b3006e1514cf2f92fb",
+        "version" : "1.0.3"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -36,6 +36,10 @@
 		8B057623298FBE0400A56C9A /* DotLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C017298ADF4E0079AF26 /* DotLoadingView.swift */; };
 		8B057624298FBE0400A56C9A /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C013298ADC560079AF26 /* ViewModel.swift */; };
 		8B05764829909A9200A56C9A /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B05764729909A9200A56C9A /* ScrollView.swift */; };
+		8B612E2529D68CC9008DF5AF /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B612E2229D68CC9008DF5AF /* TextView.swift */; };
+		8B612E2629D68CC9008DF5AF /* TokenizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B612E2329D68CC9008DF5AF /* TokenizerView.swift */; };
+		8B612E2729D68CC9008DF5AF /* TokenizerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B612E2429D68CC9008DF5AF /* TokenizerViewModel.swift */; };
+		8B612E2A29D68CE3008DF5AF /* GPTEncoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8B612E2929D68CE3008DF5AF /* GPTEncoder */; };
 		8B82463429B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82463329B1F49F0069B8F7 /* ChatGPTAPIModels.swift */; };
 		8B82463529B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82463329B1F49F0069B8F7 /* ChatGPTAPIModels.swift */; };
 		8B82463629B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82463329B1F49F0069B8F7 /* ChatGPTAPIModels.swift */; };
@@ -91,6 +95,9 @@
 		8B057617298FBDB700A56C9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B05761A298FBDB700A56C9A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8B05764729909A9200A56C9A /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
+		8B612E2229D68CC9008DF5AF /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		8B612E2329D68CC9008DF5AF /* TokenizerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenizerView.swift; sourceTree = "<group>"; };
+		8B612E2429D68CC9008DF5AF /* TokenizerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenizerViewModel.swift; sourceTree = "<group>"; };
 		8B82463329B1F49F0069B8F7 /* ChatGPTAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTAPIModels.swift; sourceTree = "<group>"; };
 		8B91C000298AD09E0079AF26 /* XCAChatGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XCAChatGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B91C003298AD09E0079AF26 /* XCAChatGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCAChatGPTApp.swift; sourceTree = "<group>"; };
@@ -130,6 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B612E2A29D68CE3008DF5AF /* GPTEncoder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +242,9 @@
 			isa = PBXGroup;
 			children = (
 				8B91C003298AD09E0079AF26 /* XCAChatGPTApp.swift */,
+				8B612E2229D68CC9008DF5AF /* TextView.swift */,
+				8B612E2329D68CC9008DF5AF /* TokenizerView.swift */,
+				8B612E2429D68CC9008DF5AF /* TokenizerViewModel.swift */,
 				8B91C007298AD09F0079AF26 /* Assets.xcassets */,
 				8B91C009298AD09F0079AF26 /* Preview Content */,
 			);
@@ -332,6 +343,9 @@
 			dependencies = (
 			);
 			name = XCAChatGPT;
+			packageProductDependencies = (
+				8B612E2929D68CE3008DF5AF /* GPTEncoder */,
+			);
 			productName = XCAChatGPT;
 			productReference = 8B91C000298AD09E0079AF26 /* XCAChatGPT.app */;
 			productType = "com.apple.product-type.application";
@@ -372,6 +386,9 @@
 				Base,
 			);
 			mainGroup = 8B91BFF7298AD09E0079AF26;
+			packageReferences = (
+				8B612E2829D68CE3008DF5AF /* XCRemoteSwiftPackageReference "GPTEncoder" */,
+			);
 			productRefGroup = 8B91C001298AD09E0079AF26 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -484,10 +501,13 @@
 			files = (
 				8B91C012298AD0CE0079AF26 /* ChatGPTAPI.swift in Sources */,
 				8B91C006298AD09E0079AF26 /* ContentView.swift in Sources */,
+				8B612E2629D68CC9008DF5AF /* TokenizerView.swift in Sources */,
+				8B612E2729D68CC9008DF5AF /* TokenizerViewModel.swift in Sources */,
 				8B82463429B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */,
 				8B91C014298ADC560079AF26 /* ViewModel.swift in Sources */,
 				8B91C018298ADF4E0079AF26 /* DotLoadingView.swift in Sources */,
 				8B91C004298AD09E0079AF26 /* XCAChatGPTApp.swift in Sources */,
+				8B612E2529D68CC9008DF5AF /* TextView.swift in Sources */,
 				8B91C01A298ADF7F0079AF26 /* MessageRowView.swift in Sources */,
 				8B91C016298ADC9D0079AF26 /* MessageRow.swift in Sources */,
 			);
@@ -938,6 +958,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8B612E2829D68CE3008DF5AF /* XCRemoteSwiftPackageReference "GPTEncoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alfianlosari/GPTEncoder.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8B612E2929D68CE3008DF5AF /* GPTEncoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B612E2829D68CE3008DF5AF /* XCRemoteSwiftPackageReference "GPTEncoder" */;
+			productName = GPTEncoder;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8B91BFF8298AD09E0079AF26 /* Project object */;
 }
