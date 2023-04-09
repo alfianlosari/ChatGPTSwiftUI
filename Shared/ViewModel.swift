@@ -15,15 +15,19 @@ class ViewModel: ObservableObject {
     @Published var messages: [MessageRow] = []
     @Published var inputMessage: String = ""
     
+    #if !os(watchOS)
     private var synthesizer: AVSpeechSynthesizer?
+    #endif
     
     private let api: ChatGPTAPI
     
     init(api: ChatGPTAPI, enableSpeech: Bool = false) {
         self.api = api
+        #if !os(watchOS)
         if enableSpeech {
             synthesizer = .init()
         }
+        #endif
     }
     
     @MainActor
@@ -84,6 +88,7 @@ class ViewModel: ObservableObject {
     }
     
     func speakLastResponse() {
+        #if !os(watchOS)
         guard let synthesizer, let responseText = self.messages.last?.responseText, !responseText.isEmpty else {
             return
         }
@@ -94,10 +99,13 @@ class ViewModel: ObservableObject {
         utterance.pitchMultiplier = 0.8
         utterance.postUtteranceDelay = 0.2
         synthesizer.speak(utterance )
+        #endif
     }
     
     func stopSpeaking() {
+        #if !os(watchOS)
         synthesizer?.stopSpeaking(at: .immediate)
+        #endif
     }
     
 }
