@@ -34,7 +34,11 @@ class ViewModel: ObservableObject {
     func sendTapped() async {
         let text = inputMessage
         inputMessage = ""
+        #if os(iOS)
+        await sendAttributed(text: text)
+        #else
         await send(text: text)
+        #endif
     }
     
     @MainActor
@@ -52,8 +56,82 @@ class ViewModel: ObservableObject {
             return
         }
         self.messages.remove(at: index)
+        #if os(iOS)
+        await sendAttributed(text: message.sendText)
+        #else
         await send(text: message.sendText)
+        #endif
     }
+    
+    #if os(iOS)
+    @MainActor
+    private func sendAttributed(text: String) async {
+        isInteractingWithChatGPT = true
+        
+        let parsingTask = ResponseParsingTask()
+        let attributedSend = await parsingTask.parse(text: text)
+        
+        var streamText = ""
+        var messageRow = MessageRow(
+            isInteractingWithChatGPT: true,
+            sendImage: "profile",
+            send: .attributed(attributedSend),
+            responseImage: "openai",
+            responseError: nil)
+        
+        self.messages.append(messageRow)
+        
+        let parserThresholdTextCount = 64
+        var currentTextCount = 0
+        var currentOutput: AttributedOutput?
+        
+        do {
+            let stream = try await api.sendMessageStream(text: text)
+            for try await text in stream {
+                streamText += text
+                currentTextCount += text.count
+                
+                if currentTextCount >= parserThresholdTextCount || text.contains("```") {
+                    currentOutput = await parsingTask.parse(text: streamText)
+                    currentTextCount = 0
+                }
+
+                if let currentOutput = currentOutput, !currentOutput.results.isEmpty {
+                    let suffixText = streamText.trimmingPrefix(currentOutput.string)
+                    var results = currentOutput.results
+                    let lastResult = results[results.count - 1]
+                    var lastAttrString = lastResult.attributedString
+                    if lastResult.isCodeBlock {
+                        lastAttrString.append(AttributedString(String(suffixText), attributes: .init([.font: UIFont.systemFont(ofSize: 12).apply(newTraits: .traitMonoSpace), .foregroundColor: UIColor.white])))
+                    } else {
+                        lastAttrString.append(AttributedString(String(suffixText)))
+                    }
+                    results[results.count - 1] = ParserResult(attributedString: lastAttrString, isCodeBlock: lastResult.isCodeBlock, codeBlockLanguage: lastResult.codeBlockLanguage)
+                    messageRow.response = .attributed(.init(string: streamText, results: results))
+                } else {
+                    messageRow.response = .attributed(.init(string: streamText, results: [
+                        ParserResult(attributedString: AttributedString(stringLiteral: streamText), isCodeBlock: false, codeBlockLanguage: nil)
+                    ]))
+                }
+
+                self.messages[self.messages.count - 1] = messageRow
+            }
+        } catch {
+            messageRow.responseError = error.localizedDescription
+            messageRow.response = .rawText(streamText)
+        }
+        
+        if let currentString = currentOutput?.string, currentString != streamText {
+            let output = await parsingTask.parse(text: streamText)
+            messageRow.response = .attributed(output)
+        }
+        
+        messageRow.isInteractingWithChatGPT = false
+        self.messages[self.messages.count - 1] = messageRow
+        isInteractingWithChatGPT = false
+        speakLastResponse()
+    }
+    #endif
     
     @MainActor
     private func send(text: String) async {
@@ -62,9 +140,9 @@ class ViewModel: ObservableObject {
         var messageRow = MessageRow(
             isInteractingWithChatGPT: true,
             sendImage: "profile",
-            sendText: text,
+            send: .rawText(text),
             responseImage: "openai",
-            responseText: streamText,
+            response: .rawText(streamText),
             responseError: nil)
         
         self.messages.append(messageRow)
@@ -73,7 +151,7 @@ class ViewModel: ObservableObject {
             let stream = try await api.sendMessageStream(text: text)
             for try await text in stream {
                 streamText += text
-                messageRow.responseText = streamText.trimmingCharacters(in: .whitespacesAndNewlines)
+                messageRow.response = .rawText(streamText.trimmingCharacters(in: .whitespacesAndNewlines))
                 self.messages[self.messages.count - 1] = messageRow
             }
         } catch {
@@ -109,3 +187,5 @@ class ViewModel: ObservableObject {
     }
     
 }
+
+

@@ -53,6 +53,15 @@
 		8B91C016298ADC9D0079AF26 /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C015298ADC9D0079AF26 /* MessageRow.swift */; };
 		8B91C018298ADF4E0079AF26 /* DotLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C017298ADF4E0079AF26 /* DotLoadingView.swift */; };
 		8B91C01A298ADF7F0079AF26 /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B91C019298ADF7F0079AF26 /* MessageRowView.swift */; };
+		8BC0F8D029F157C800D6B492 /* Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC0F8CF29F157C800D6B492 /* Markdown */; };
+		8BC0F8D329F157E600D6B492 /* Highlighter in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC0F8D229F157E600D6B492 /* Highlighter */; };
+		8BC0F8D529F1581800D6B492 /* MarkdownAttributedStringParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0F8D429F1581800D6B492 /* MarkdownAttributedStringParser.swift */; };
+		8BC0F8D729F1583300D6B492 /* ParserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0F8D629F1583300D6B492 /* ParserResult.swift */; };
+		8BC0F8D829F1583300D6B492 /* ParserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0F8D629F1583300D6B492 /* ParserResult.swift */; };
+		8BC0F8D929F1583300D6B492 /* ParserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0F8D629F1583300D6B492 /* ParserResult.swift */; };
+		8BC0F8DA29F1583300D6B492 /* ParserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0F8D629F1583300D6B492 /* ParserResult.swift */; };
+		8BC0F8DC29F1587600D6B492 /* ResponseParsingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0F8DB29F1587600D6B492 /* ResponseParsingTask.swift */; };
+		8BC0F8DE29F1589600D6B492 /* CodeBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0F8DD29F1589600D6B492 /* CodeBlockView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +118,10 @@
 		8B91C015298ADC9D0079AF26 /* MessageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRow.swift; sourceTree = "<group>"; };
 		8B91C017298ADF4E0079AF26 /* DotLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotLoadingView.swift; sourceTree = "<group>"; };
 		8B91C019298ADF7F0079AF26 /* MessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRowView.swift; sourceTree = "<group>"; };
+		8BC0F8D429F1581800D6B492 /* MarkdownAttributedStringParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownAttributedStringParser.swift; sourceTree = "<group>"; };
+		8BC0F8D629F1583300D6B492 /* ParserResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserResult.swift; sourceTree = "<group>"; };
+		8BC0F8DB29F1587600D6B492 /* ResponseParsingTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseParsingTask.swift; sourceTree = "<group>"; };
+		8BC0F8DD29F1589600D6B492 /* CodeBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBlockView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +151,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B612E2A29D68CE3008DF5AF /* GPTEncoder in Frameworks */,
+				8BC0F8D329F157E600D6B492 /* Highlighter in Frameworks */,
+				8BC0F8D029F157C800D6B492 /* Markdown in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +188,10 @@
 				8B91C019298ADF7F0079AF26 /* MessageRowView.swift */,
 				8B91C013298ADC560079AF26 /* ViewModel.swift */,
 				8B91C015298ADC9D0079AF26 /* MessageRow.swift */,
+				8BC0F8D429F1581800D6B492 /* MarkdownAttributedStringParser.swift */,
+				8BC0F8D629F1583300D6B492 /* ParserResult.swift */,
+				8BC0F8DB29F1587600D6B492 /* ResponseParsingTask.swift */,
+				8BC0F8DD29F1589600D6B492 /* CodeBlockView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -345,6 +364,8 @@
 			name = XCAChatGPT;
 			packageProductDependencies = (
 				8B612E2929D68CE3008DF5AF /* GPTEncoder */,
+				8BC0F8CF29F157C800D6B492 /* Markdown */,
+				8BC0F8D229F157E600D6B492 /* Highlighter */,
 			);
 			productName = XCAChatGPT;
 			productReference = 8B91C000298AD09E0079AF26 /* XCAChatGPT.app */;
@@ -388,6 +409,8 @@
 			mainGroup = 8B91BFF7298AD09E0079AF26;
 			packageReferences = (
 				8B612E2829D68CE3008DF5AF /* XCRemoteSwiftPackageReference "GPTEncoder" */,
+				8BC0F8CE29F157C800D6B492 /* XCRemoteSwiftPackageReference "swift-markdown" */,
+				8BC0F8D129F157E600D6B492 /* XCRemoteSwiftPackageReference "HighlighterSwift" */,
 			);
 			productRefGroup = 8B91C001298AD09E0079AF26 /* Products */;
 			projectDirPath = "";
@@ -456,6 +479,7 @@
 				8B057597298E52DD00A56C9A /* MessageRow.swift in Sources */,
 				8B057593298E52D900A56C9A /* ChatGPTAPI.swift in Sources */,
 				8B82463529B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */,
+				8BC0F8D829F1583300D6B492 /* ParserResult.swift in Sources */,
 				8B057594298E52D900A56C9A /* ContentView.swift in Sources */,
 				8B057592298E52D900A56C9A /* DotLoadingView.swift in Sources */,
 				8B057595298E52D900A56C9A /* MessageRowView.swift in Sources */,
@@ -471,6 +495,7 @@
 				8B057608298FA9E900A56C9A /* DotLoadingView.swift in Sources */,
 				8B057606298FA9E900A56C9A /* MessageRowView.swift in Sources */,
 				8B82463629B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */,
+				8BC0F8D929F1583300D6B492 /* ParserResult.swift in Sources */,
 				8B057609298FA9E900A56C9A /* MessageRow.swift in Sources */,
 				8B057605298FA9E900A56C9A /* ContentView.swift in Sources */,
 				8B05760A298FA9E900A56C9A /* ChatGPTAPI.swift in Sources */,
@@ -486,6 +511,7 @@
 				8B057621298FBE0400A56C9A /* MessageRow.swift in Sources */,
 				8B057622298FBE0400A56C9A /* MessageRowView.swift in Sources */,
 				8B82463729B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */,
+				8BC0F8DA29F1583300D6B492 /* ParserResult.swift in Sources */,
 				8B05761F298FBE0400A56C9A /* ChatGPTAPI.swift in Sources */,
 				8B057623298FBE0400A56C9A /* DotLoadingView.swift in Sources */,
 				8B057614298FBDB600A56C9A /* XCAChatGPTTVApp.swift in Sources */,
@@ -501,14 +527,18 @@
 			files = (
 				8B91C012298AD0CE0079AF26 /* ChatGPTAPI.swift in Sources */,
 				8B91C006298AD09E0079AF26 /* ContentView.swift in Sources */,
+				8BC0F8DC29F1587600D6B492 /* ResponseParsingTask.swift in Sources */,
 				8B612E2629D68CC9008DF5AF /* TokenizerView.swift in Sources */,
 				8B612E2729D68CC9008DF5AF /* TokenizerViewModel.swift in Sources */,
 				8B82463429B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */,
+				8BC0F8DE29F1589600D6B492 /* CodeBlockView.swift in Sources */,
 				8B91C014298ADC560079AF26 /* ViewModel.swift in Sources */,
+				8BC0F8D729F1583300D6B492 /* ParserResult.swift in Sources */,
 				8B91C018298ADF4E0079AF26 /* DotLoadingView.swift in Sources */,
 				8B91C004298AD09E0079AF26 /* XCAChatGPTApp.swift in Sources */,
 				8B612E2529D68CC9008DF5AF /* TextView.swift in Sources */,
 				8B91C01A298ADF7F0079AF26 /* MessageRowView.swift in Sources */,
+				8BC0F8D529F1581800D6B492 /* MarkdownAttributedStringParser.swift in Sources */,
 				8B91C016298ADC9D0079AF26 /* MessageRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -968,6 +998,22 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		8BC0F8CE29F157C800D6B492 /* XCRemoteSwiftPackageReference "swift-markdown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-markdown";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		8BC0F8D129F157E600D6B492 /* XCRemoteSwiftPackageReference "HighlighterSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alfianlosari/HighlighterSwift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -975,6 +1021,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B612E2829D68CE3008DF5AF /* XCRemoteSwiftPackageReference "GPTEncoder" */;
 			productName = GPTEncoder;
+		};
+		8BC0F8CF29F157C800D6B492 /* Markdown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BC0F8CE29F157C800D6B492 /* XCRemoteSwiftPackageReference "swift-markdown" */;
+			productName = Markdown;
+		};
+		8BC0F8D229F157E600D6B492 /* Highlighter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BC0F8D129F157E600D6B492 /* XCRemoteSwiftPackageReference "HighlighterSwift" */;
+			productName = Highlighter;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

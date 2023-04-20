@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+#if os(iOS)
+import Markdown
+#endif
 
 struct MessageRowView: View {
     
@@ -25,20 +28,20 @@ struct MessageRowView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            messageRow(text: message.sendText, image: message.sendImage, bgColor: colorScheme == .light ? .white : Color(red: 52/255, green: 53/255, blue: 65/255, opacity: 0.5))
+            messageRow(rowType: message.send, image: message.sendImage, bgColor: colorScheme == .light ? .white : Color(red: 52/255, green: 53/255, blue: 65/255, opacity: 0.5))
             
-            if let text = message.responseText {
+            if let response = message.response {
                 Divider()
-                messageRow(text: text, image: message.responseImage, bgColor: colorScheme == .light ? .gray.opacity(0.1) : Color(red: 52/255, green: 53/255, blue: 65/255, opacity: 1), responseError: message.responseError, showDotLoading: message.isInteractingWithChatGPT)
+                messageRow(rowType: response, image: message.responseImage, bgColor: colorScheme == .light ? .gray.opacity(0.1) : Color(red: 52/255, green: 53/255, blue: 65/255, opacity: 1), responseError: message.responseError, showDotLoading: message.isInteractingWithChatGPT)
                 Divider()
             }
         }
     }
     
-    func messageRow(text: String, image: String, bgColor: Color, responseError: String? = nil, showDotLoading: Bool = false) -> some View {
+    func messageRow(rowType: MessageRowType, image: String, bgColor: Color, responseError: String? = nil, showDotLoading: Bool = false) -> some View {
         #if os(watchOS)
         VStack(alignment: .leading, spacing: 8) {
-            messageRowContent(text: text, image: image, responseError: responseError, showDotLoading: showDotLoading)
+            messageRowContent(rowType: rowType, image: image, responseError: responseError, showDotLoading: showDotLoading)
         }
         
         .padding(16)
@@ -46,7 +49,7 @@ struct MessageRowView: View {
         .background(bgColor)
         #else
         HStack(alignment: .top, spacing: 24) {
-            messageRowContent(text: text, image: image, responseError: responseError, showDotLoading: showDotLoading)
+            messageRowContent(rowType: rowType, image: image, responseError: responseError, showDotLoading: showDotLoading)
         }
         #if os(tvOS)
         .padding(32)
@@ -59,7 +62,7 @@ struct MessageRowView: View {
     }
     
     @ViewBuilder
-    func messageRowContent(text: String, image: String, responseError: String? = nil, showDotLoading: Bool = false) -> some View {
+    func messageRowContent(rowType: MessageRowType, image: String, responseError: String? = nil, showDotLoading: Bool = false) -> some View {
         if image.hasPrefix("http"), let url = URL(string: image) {
             AsyncImage(url: url) { image in
                 image
@@ -76,16 +79,22 @@ struct MessageRowView: View {
         }
         
         VStack(alignment: .leading) {
-            if !text.isEmpty {
-                #if os(tvOS)
-                responseTextView(text: text)
-                #else
-                Text(text)
-                    .multilineTextAlignment(.leading)
-                    #if os(iOS) || os(macOS)
-                    .textSelection(.enabled)
+            switch rowType {
+            case .attributed(let attributedOutput):
+                attributedView(results: attributedOutput.results)
+                
+            case .rawText(let text):
+                if !text.isEmpty {
+                    #if os(tvOS)
+                    responseTextView(text: text)
+                    #else
+                    Text(text)
+                        .multilineTextAlignment(.leading)
+                        #if os(iOS) || os(macOS)
+                        .textSelection(.enabled)
+                        #endif
                     #endif
-                #endif
+                }
             }
             
             if let error = responseError {
@@ -110,6 +119,29 @@ struct MessageRowView: View {
                     .frame(width: 60, height: 30)
                 #endif
                 
+            }
+        }
+    }
+    
+    func attributedView(results: [ParserResult]) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(results) { parsed in
+                if parsed.isCodeBlock {
+                    #if os(iOS)
+                    CodeBlockView(parserResult: parsed)
+                        .padding(.bottom, 24)
+                    #else
+                    Text(parsed.attributedString)
+                        #if os(iOS) || os(macOS)
+                        .textSelection(.enabled)
+                        #endif
+                    #endif
+                } else {
+                    Text(parsed.attributedString)
+                        #if os(iOS) || os(macOS)
+                        .textSelection(.enabled)
+                        #endif
+                }
             }
         }
     }
@@ -154,15 +186,15 @@ struct MessageRowView_Previews: PreviewProvider {
     
     static let message = MessageRow(
         isInteractingWithChatGPT: true, sendImage: "profile",
-        sendText: "What is SwiftUI?",
+        send: .rawText("What is SwiftUI?"),
         responseImage: "openai",
-        responseText: "SwiftUI is a user interface framework that allows developers to design and develop user interfaces for iOS, macOS, watchOS, and tvOS applications using Swift, a programming language developed by Apple Inc.")
+        response: responseMessageRowType)
     
     static let message2 = MessageRow(
         isInteractingWithChatGPT: false, sendImage: "profile",
-        sendText: "What is SwiftUI?",
+        send: .rawText("What is SwiftUI?"),
         responseImage: "openai",
-        responseText: "",
+        response: .rawText(""),
         responseError: "ChatGPT is currently not available")
         
     static var previews: some View {
@@ -177,8 +209,94 @@ struct MessageRowView_Previews: PreviewProvider {
                 })
                   
             }
-            .frame(width: 400)
             .previewLayout(.sizeThatFits)
         }
     }
+    
+    static var responseMessageRowType: MessageRowType {
+        #if os(iOS)
+        let document = Document(parsing: rawString)
+        var parser = MarkdownAttributedStringParser()
+        let results = parser.parserResults(from: document)
+        return MessageRowType.attributed(.init(string: rawString, results: results))
+        #else
+        MessageRowType.rawText(rawString)
+        #endif
+    }
+    
+    static var rawString: String {
+        #if os(iOS)
+        """
+        ## Supported Platforms
+
+        - iOS/tvOS 15 and above
+        - macOS 12 and above
+        - watchOS 8 and above
+        - Linux
+
+        ## Installation
+
+        ### Swift Package Manager
+        - File > Swift Packages > Add Package Dependency
+        - Add https://github.com/alfianlosari/ChatGPTSwift.git
+
+        ### Cocoapods
+        ```ruby
+        platform :ios, '15.0'
+        use_frameworks!
+
+        target 'MyApp' do
+          pod 'ChatGPTSwift', '~> 1.3.1'
+        end
+        ```
+
+        ## Requirement
+
+        Register for API key from [OpenAI](https://openai.com/api). Initialize with api key
+
+        ```swift
+        let api = ChatGPTAPI(apiKey: "API_KEY")
+        ```
+
+        ## Usage
+
+        There are 2 APIs: stream and normal
+
+        ### Stream
+
+        The server will stream chunks of data until complete, the method `AsyncThrowingStream` which you can loop using For-Loop like so:
+
+        ```swift
+        Task {
+            do {
+                let stream = try await api.sendMessageStream(text: "What is ChatGPT?")
+                for try await line in stream {
+                    print(line)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        ```
+
+        ### Normal
+        A normal HTTP request and response lifecycle. Server will send the complete text (it will take more time to response)
+
+        ```swift
+        Task {
+            do {
+                let response = try await api.sendMessage(text: "What is ChatGPT?")
+                print(response)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        ```
+        """
+        #else
+        "SwiftUI is a user interface framework that allows developers to design and develop user interfaces for iOS, macOS, watchOS, and tvOS applications using Swift, a programming language developed by Apple Inc."
+        #endif
+    }
 }
+
+
