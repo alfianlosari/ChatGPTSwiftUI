@@ -73,7 +73,18 @@ struct ContentView: View {
                 .disabled(vm.isInteractingWithChatGPT)
             
             if vm.isInteractingWithChatGPT {
+                #if os(iOS)
+                Button {
+                    vm.cancelStreamingResponse()
+                } label: {
+                    Image(systemName: "stop.circle.fill")
+                        .font(.system(size: 30))
+                        .symbolRenderingMode(.multicolor)
+                        .foregroundColor(.red)
+                }
+                #else
                 DotLoadingView().frame(width: 60, height: 30)
+                #endif
             } else {
                 Button {
                     Task { @MainActor in

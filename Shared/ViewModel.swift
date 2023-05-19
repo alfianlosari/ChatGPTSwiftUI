@@ -14,6 +14,7 @@ class ViewModel: ObservableObject {
     @Published var isInteractingWithChatGPT = false
     @Published var messages: [MessageRow] = []
     @Published var inputMessage: String = ""
+    var task: Task<Void, Never>?
     
     #if !os(watchOS)
     private var synthesizer: AVSpeechSynthesizer?
@@ -32,11 +33,15 @@ class ViewModel: ObservableObject {
     
     @MainActor
     func sendTapped() async {
+        #if os(iOS)
+        self.task = Task {
+            let text = inputMessage
+            inputMessage = ""
+            await sendAttributed(text: text)
+        }
+        #else
         let text = inputMessage
         inputMessage = ""
-        #if os(iOS)
-        await sendAttributed(text: text)
-        #else
         await send(text: text)
         #endif
     }
@@ -52,40 +57,53 @@ class ViewModel: ObservableObject {
     
     @MainActor
     func retry(message: MessageRow) async {
+        #if os(iOS)
+        self.task = Task {
+            guard let index = messages.firstIndex(where: { $0.id == message.id }) else {
+                return
+            }
+            self.messages.remove(at: index)
+            await sendAttributed(text: message.sendText)
+        }
+        #else
         guard let index = messages.firstIndex(where: { $0.id == message.id }) else {
             return
         }
         self.messages.remove(at: index)
-        #if os(iOS)
-        await sendAttributed(text: message.sendText)
-        #else
         await send(text: message.sendText)
         #endif
+    }
+    
+    func cancelStreamingResponse() {
+        self.task?.cancel()
+        self.task = nil
     }
     
     #if os(iOS)
     @MainActor
     private func sendAttributed(text: String) async {
         isInteractingWithChatGPT = true
-        
-        let parsingTask = ResponseParsingTask()
-        let attributedSend = await parsingTask.parse(text: text)
-        
         var streamText = ""
+        
         var messageRow = MessageRow(
             isInteractingWithChatGPT: true,
             sendImage: "profile",
-            send: .attributed(attributedSend),
+            send: .rawText(text),
             responseImage: "openai",
             responseError: nil)
-        
-        self.messages.append(messageRow)
-        
-        let parserThresholdTextCount = 64
-        var currentTextCount = 0
-        var currentOutput: AttributedOutput?
-        
+    
         do {
+            let parsingTask = ResponseParsingTask()
+            let attributedSend = await parsingTask.parse(text: text)
+            try Task.checkCancellation()
+            messageRow.send = .attributed(attributedSend)
+            
+            self.messages.append(messageRow)
+            
+            let parserThresholdTextCount = 64
+            var currentTextCount = 0
+            var currentOutput: AttributedOutput?
+            
             let stream = try await api.sendMessageStream(text: text)
             for try await text in stream {
                 streamText += text
@@ -93,6 +111,7 @@ class ViewModel: ObservableObject {
                 
                 if currentTextCount >= parserThresholdTextCount || text.contains("```") {
                     currentOutput = await parsingTask.parse(text: streamText)
+                    try Task.checkCancellation()
                     currentTextCount = 0
                 }
 
@@ -115,17 +134,22 @@ class ViewModel: ObservableObject {
                 }
 
                 self.messages[self.messages.count - 1] = messageRow
+                if let currentString = currentOutput?.string, currentString != streamText {
+                    let output = await parsingTask.parse(text: streamText)
+                    try Task.checkCancellation()
+                    messageRow.response = .attributed(output)
+                }
             }
+        } catch is CancellationError {
+            messageRow.responseError = "The response was cancelled"
         } catch {
             messageRow.responseError = error.localizedDescription
+        }
+        
+        if messageRow.response == nil {
             messageRow.response = .rawText(streamText)
         }
-        
-        if let currentString = currentOutput?.string, currentString != streamText {
-            let output = await parsingTask.parse(text: streamText)
-            messageRow.response = .attributed(output)
-        }
-        
+  
         messageRow.isInteractingWithChatGPT = false
         self.messages[self.messages.count - 1] = messageRow
         isInteractingWithChatGPT = false
