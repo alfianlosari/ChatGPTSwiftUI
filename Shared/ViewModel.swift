@@ -90,6 +90,7 @@ class ViewModel: ObservableObject {
             sendImage: "profile",
             send: .rawText(text),
             responseImage: "openai",
+            response: .rawText(streamText),
             responseError: nil)
     
         do {
