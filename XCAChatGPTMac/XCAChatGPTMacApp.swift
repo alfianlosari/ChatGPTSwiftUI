@@ -11,26 +11,14 @@ import SwiftUI
 struct XCAChatGPTMacApp: App {
     
     @StateObject var vm = ViewModel(api: ChatGPTAPI(apiKey: "API_KEY"))
+    @State var llmConfig: LLMConfig?
     
     var body: some Scene {
-        MenuBarExtra("XCA ChatGPT", image: "icon") {
-            VStack(spacing: 0) {
+        MenuBarExtra(vm.title, systemImage: "bubbles.and.sparkles") {
+            VStack(spacing: 16) {
                 HStack {
-                    Text("XCA ChatGPT")
-                        .font(.title)
+                    Text(vm.title).font(.title)
                     Spacer()
-                   
-                    Button {
-                        guard !vm.isInteractingWithChatGPT else { return }
-                        vm.clearMessages()
-                    } label: {
-                        Image(systemName: "trash")
-                            .symbolRenderingMode(.multicolor)
-                            .font(.system(size: 24))
-                    }
-
-                    .buttonStyle(.borderless)
-                    
                     
                     Button {
                         exit(0)
@@ -41,12 +29,44 @@ struct XCAChatGPTMacApp: App {
                     }
 
                     .buttonStyle(.borderless)
-                }
-                .padding()
+                }.padding()
                 
-                ContentView(vm: vm)
+                LLMConfigView { config in
+                    vm.updateClient(config.createClient())
+                    llmConfig = config
+                }
             }
-            .frame(width: 480, height: 576)
+            .frame(width: 480, height: 648)
+
+            .sheet(item: $llmConfig) { _ in
+                VStack(spacing: 0) {
+                    HStack {
+                        Text(vm.navigationTitle)
+                            .font(.title)
+                        Spacer()
+                        
+                        Button("Switch LLM", role: .destructive) {
+                            llmConfig = nil
+                        }
+                       
+                        Button {
+                            guard !vm.isInteracting else { return }
+                            vm.clearMessages()
+                        } label: {
+                            Image(systemName: "trash")
+                                .symbolRenderingMode(.multicolor)
+                                .font(.system(size: 24))
+                        }
+
+                        .buttonStyle(.borderless)
+                    }
+                    .padding()
+                    
+                    ContentView(vm: vm)
+                }
+                .frame(width: 480, height: 648)
+            }
         }.menuBarExtraStyle(.window)
     }
 }
+

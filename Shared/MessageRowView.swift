@@ -32,7 +32,7 @@ struct MessageRowView: View {
             
             if let response = message.response {
                 Divider()
-                messageRow(rowType: response, image: message.responseImage, bgColor: colorScheme == .light ? .gray.opacity(0.1) : Color(red: 52/255, green: 53/255, blue: 65/255, opacity: 1), responseError: message.responseError, showDotLoading: message.isInteractingWithChatGPT)
+                messageRow(rowType: response, image: message.responseImage, bgColor: colorScheme == .light ? .gray.opacity(0.1) : Color(red: 52/255, green: 53/255, blue: 65/255, opacity: 1), responseError: message.responseError, showDotLoading: message.isInteracting)
                 Divider()
             }
         }
@@ -185,13 +185,13 @@ struct MessageRowView: View {
 struct MessageRowView_Previews: PreviewProvider {
     
     static let message = MessageRow(
-        isInteractingWithChatGPT: true, sendImage: "profile",
+        isInteracting: true, sendImage: "profile",
         send: .rawText("What is SwiftUI?"),
         responseImage: "openai",
         response: responseMessageRowType)
     
     static let message2 = MessageRow(
-        isInteractingWithChatGPT: false, sendImage: "profile",
+        isInteracting: false, sendImage: "profile",
         send: .rawText("What is SwiftUI?"),
         responseImage: "openai",
         response: .rawText(""),

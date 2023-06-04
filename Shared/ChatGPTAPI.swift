@@ -7,7 +7,9 @@
 
 import Foundation
 
-class ChatGPTAPI: @unchecked Sendable {
+class ChatGPTAPI: LLMClient, @unchecked Sendable {
+    
+    var provider: LLMProvider { .chatGPT }
     
     private let systemMessage: Message
     private let temperature: Double
@@ -156,5 +158,6 @@ extension String: CustomNSError {
         ]
     }
 }
+
 
 

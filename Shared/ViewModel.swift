@@ -11,7 +11,7 @@ import AVKit
 
 class ViewModel: ObservableObject {
     
-    @Published var isInteractingWithChatGPT = false
+    @Published var isInteracting = false
     @Published var messages: [MessageRow] = []
     @Published var inputMessage: String = ""
     var task: Task<Void, Never>?
@@ -20,9 +20,17 @@ class ViewModel: ObservableObject {
     private var synthesizer: AVSpeechSynthesizer?
     #endif
     
-    private let api: ChatGPTAPI
+    private var api: LLMClient
     
-    init(api: ChatGPTAPI, enableSpeech: Bool = false) {
+    var title: String {
+        "XCA LLM Chatbot"
+    }
+    
+    var navigationTitle: String {
+        api.provider.navigationTitle
+    }
+    
+    init(api: LLMClient, enableSpeech: Bool = false) {
         self.api = api
         #if !os(watchOS)
         if enableSpeech {
@@ -31,18 +39,31 @@ class ViewModel: ObservableObject {
         #endif
     }
     
+    func updateClient(_ client: LLMClient) {
+        self.messages = []
+        self.api = client
+    }
+    
     @MainActor
     func sendTapped() async {
         #if os(iOS)
         self.task = Task {
             let text = inputMessage
             inputMessage = ""
-            await sendAttributed(text: text)
+            if api.provider == .chatGPT {
+                await sendAttributed(text: text)
+            } else {
+                await sendAttributedWithoutStream(text: text)
+            }
         }
         #else
         let text = inputMessage
         inputMessage = ""
-        await send(text: text)
+        if api.provider == .chatGPT {
+            await send(text: text)
+        } else {
+            await sendWithoutStream(text: text)
+        }
         #endif
     }
     
@@ -63,14 +84,22 @@ class ViewModel: ObservableObject {
                 return
             }
             self.messages.remove(at: index)
-            await sendAttributed(text: message.sendText)
+            if api.provider == .chatGPT {
+                await sendAttributed(text: message.sendText)
+            } else {
+                await sendAttributedWithoutStream(text: message.sendText)
+            }
         }
         #else
         guard let index = messages.firstIndex(where: { $0.id == message.id }) else {
             return
         }
         self.messages.remove(at: index)
-        await send(text: message.sendText)
+        if api.provider == .chatGPT {
+            await send(text: message.sendText)
+        } else {
+            await sendWithoutStream(text: message.sendText)
+        }
         #endif
     }
     
@@ -82,14 +111,14 @@ class ViewModel: ObservableObject {
     #if os(iOS)
     @MainActor
     private func sendAttributed(text: String) async {
-        isInteractingWithChatGPT = true
+        isInteracting = true
         var streamText = ""
         
         var messageRow = MessageRow(
-            isInteractingWithChatGPT: true,
+            isInteracting: true,
             sendImage: "profile",
             send: .rawText(text),
-            responseImage: "openai",
+            responseImage: api.provider.imageName,
             response: .rawText(streamText),
             responseError: nil)
     
@@ -151,22 +180,56 @@ class ViewModel: ObservableObject {
             messageRow.response = .rawText(streamText)
         }
   
-        messageRow.isInteractingWithChatGPT = false
+        messageRow.isInteracting = false
         self.messages[self.messages.count - 1] = messageRow
-        isInteractingWithChatGPT = false
+        isInteracting = false
         speakLastResponse()
+    }
+    
+    @MainActor
+    private func sendAttributedWithoutStream(text: String) async {
+        isInteracting = true
+        var messageRow = MessageRow(
+            isInteracting: true,
+            sendImage: "profile",
+            send: .rawText(text),
+            responseImage: api.provider.imageName,
+            response: .rawText(""),
+            responseError: nil)
+        
+        self.messages.append(messageRow)
+        
+        do {
+            let responseText = try await api.sendMessage(text)
+            try Task.checkCancellation()
+            
+            let parsingTask = ResponseParsingTask()
+            let output = await parsingTask.parse(text: responseText)
+            try Task.checkCancellation()
+            
+            messageRow.response = .attributed(output)
+            
+        } catch {
+            messageRow.responseError = error.localizedDescription
+        }
+        
+        messageRow.isInteracting = false
+        self.messages[self.messages.count - 1] = messageRow
+        isInteracting = false
+        speakLastResponse()
+
     }
     #endif
     
     @MainActor
     private func send(text: String) async {
-        isInteractingWithChatGPT = true
+        isInteracting = true
         var streamText = ""
         var messageRow = MessageRow(
-            isInteractingWithChatGPT: true,
+            isInteracting: true,
             sendImage: "profile",
             send: .rawText(text),
-            responseImage: "openai",
+            responseImage: api.provider.imageName,
             response: .rawText(streamText),
             responseError: nil)
         
@@ -183,11 +246,38 @@ class ViewModel: ObservableObject {
             messageRow.responseError = error.localizedDescription
         }
         
-        messageRow.isInteractingWithChatGPT = false
+        messageRow.isInteracting = false
         self.messages[self.messages.count - 1] = messageRow
-        isInteractingWithChatGPT = false
+        isInteracting = false
         speakLastResponse()
         
+    }
+    
+    @MainActor
+    private func sendWithoutStream(text: String) async {
+        isInteracting = true
+        var messageRow = MessageRow(
+            isInteracting: true,
+            sendImage: "profile",
+            send: .rawText(text),
+            responseImage: api.provider.imageName,
+            response: .rawText(""),
+            responseError: nil)
+        
+        self.messages.append(messageRow)
+        
+        do {
+            let responseText = try await api.sendMessage(text)
+            try Task.checkCancellation()
+            messageRow.response = .rawText(responseText)
+        } catch {
+            messageRow.responseError = error.localizedDescription
+        }
+        
+        messageRow.isInteracting = false
+        self.messages[self.messages.count - 1] = messageRow
+        isInteracting = false
+        speakLastResponse()
     }
     
     func speakLastResponse() {
@@ -212,5 +302,6 @@ class ViewModel: ObservableObject {
     }
     
 }
+
 
 

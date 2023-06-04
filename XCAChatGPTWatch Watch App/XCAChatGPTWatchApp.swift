@@ -11,36 +11,51 @@ import SwiftUI
 struct XCAChatGPTWatch_Watch_AppApp: App {
     
     @StateObject var vm = ViewModel(api: ChatGPTAPI(apiKey: "API_KEY"))
+    @State private var presentedConfigs = [LLMConfig]()
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                ContentView(vm: vm)
-                    .edgesIgnoringSafeArea([.horizontal, .bottom])
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItemGroup {
-                            HStack {
-                                Button("Send") {
-                                    self.presentInputController(withSuggestions: []) { result in
-                                        Task { @MainActor in
-                                            guard !result.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
-                                            vm.inputMessage = result.trimmingCharacters(in: .whitespacesAndNewlines)
-                                            await vm.sendTapped()
+            NavigationStack(path: $presentedConfigs) {
+                LLMConfigView { config in
+                    vm.updateClient(config.createClient())
+                    presentedConfigs.append(config)
+                }
+                .navigationTitle(vm.title)
+                .navigationDestination(for: LLMConfig.self) { _ in
+                    ContentView(vm: vm)
+                        .edgesIgnoringSafeArea([.horizontal, .bottom])
+                        .navigationBarTitleDisplayMode(.inline)
+                        .overlay {
+                            if vm.messages.isEmpty {
+                                Text("Scroll to top and tap send to Chat")
+                            }
+                        }
+                        .toolbar {
+                            ToolbarItemGroup {
+                                HStack {
+                                    Button("Send") {
+                                        self.presentInputController(withSuggestions: []) { result in
+                                            Task { @MainActor in
+                                                guard !result.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+                                                vm.inputMessage = result.trimmingCharacters(in: .whitespacesAndNewlines)
+                                                await vm.sendTapped()
+                                            }
                                         }
                                     }
+                                    
+                                    Button("Clear", role: .destructive) {
+                                        vm.clearMessages()
+                                    }
+                                    .tint(.red)
+                                    .disabled(vm.isInteracting || vm.messages.isEmpty)
                                 }
-                                
-                                Button("Clear", role: .destructive) {
-                                    vm.clearMessages()
-                                }
-                                .tint(.red)
-                                .disabled(vm.isInteractingWithChatGPT || vm.messages.isEmpty)
+                                .padding(.bottom)
                             }
-                            .padding(.bottom)
                         }
-                    }
+                }
+
             }
+            
         }
     }
 }
@@ -63,3 +78,4 @@ extension App {
             }
     }
 }
+

@@ -30,7 +30,7 @@ struct MessageRow: Identifiable {
     
     let id = UUID()
     
-    var isInteractingWithChatGPT: Bool
+    var isInteracting: Bool
     
     let sendImage: String
     var send: MessageRowType

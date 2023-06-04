@@ -1,6 +1,24 @@
 {
   "pins" : [
     {
+      "identity" : "generative-ai-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/generative-ai-swift",
+      "state" : {
+        "revision" : "c16f7c335a45b5541c85bebcdc1443305c10926f",
+        "version" : "0.2.0"
+      }
+    },
+    {
+      "identity" : "get",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kean/Get",
+      "state" : {
+        "revision" : "12830cc64f31789ae6f4352d2d51d03a25fc3741",
+        "version" : "2.1.6"
+      }
+    },
+    {
       "identity" : "gptencoder",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/alfianlosari/GPTEncoder.git",
@@ -34,6 +52,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "528d49cb5130e9c84081e13e7bd639a011b9f89d"
+      }
+    },
+    {
+      "identity" : "urlqueryencoder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CreateAPI/URLQueryEncoder",
+      "state" : {
+        "revision" : "4ce950479707ea109f229d7230ec074a133b15d7",
+        "version" : "0.2.1"
       }
     }
   ],

@@ -40,6 +40,30 @@
 		8B612E2629D68CC9008DF5AF /* TokenizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B612E2329D68CC9008DF5AF /* TokenizerView.swift */; };
 		8B612E2729D68CC9008DF5AF /* TokenizerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B612E2429D68CC9008DF5AF /* TokenizerViewModel.swift */; };
 		8B612E2A29D68CE3008DF5AF /* GPTEncoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8B612E2929D68CE3008DF5AF /* GPTEncoder */; };
+		8B75A1B12A2CB7C600E8810E /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 8B75A1B02A2CB7C600E8810E /* GoogleGenerativeAI */; };
+		8B75A1B42A2CB7D200E8810E /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 8B75A1B32A2CB7D200E8810E /* GoogleGenerativeAI */; };
+		8B75A1B62A2CB7D500E8810E /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 8B75A1B52A2CB7D500E8810E /* GoogleGenerativeAI */; };
+		8B75A1B82A2CB7DA00E8810E /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 8B75A1B72A2CB7DA00E8810E /* GoogleGenerativeAI */; };
+		8B75A1BE2A2CB83900E8810E /* LLMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BA2A2CB83900E8810E /* LLMClient.swift */; };
+		8B75A1BF2A2CB83900E8810E /* LLMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BA2A2CB83900E8810E /* LLMClient.swift */; };
+		8B75A1C02A2CB83900E8810E /* LLMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BA2A2CB83900E8810E /* LLMClient.swift */; };
+		8B75A1C12A2CB83900E8810E /* LLMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BA2A2CB83900E8810E /* LLMClient.swift */; };
+		8B75A1C22A2CB83900E8810E /* PaLMChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BB2A2CB83900E8810E /* PaLMChatAPI.swift */; };
+		8B75A1C32A2CB83900E8810E /* PaLMChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BB2A2CB83900E8810E /* PaLMChatAPI.swift */; };
+		8B75A1C42A2CB83900E8810E /* PaLMChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BB2A2CB83900E8810E /* PaLMChatAPI.swift */; };
+		8B75A1C52A2CB83900E8810E /* PaLMChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BB2A2CB83900E8810E /* PaLMChatAPI.swift */; };
+		8B75A1C62A2CB83900E8810E /* LLMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BC2A2CB83900E8810E /* LLMConfig.swift */; };
+		8B75A1C72A2CB83900E8810E /* LLMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BC2A2CB83900E8810E /* LLMConfig.swift */; };
+		8B75A1C82A2CB83900E8810E /* LLMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BC2A2CB83900E8810E /* LLMConfig.swift */; };
+		8B75A1C92A2CB83900E8810E /* LLMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BC2A2CB83900E8810E /* LLMConfig.swift */; };
+		8B75A1CA2A2CB83900E8810E /* LLMProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BD2A2CB83900E8810E /* LLMProvider.swift */; };
+		8B75A1CB2A2CB83900E8810E /* LLMProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BD2A2CB83900E8810E /* LLMProvider.swift */; };
+		8B75A1CC2A2CB83900E8810E /* LLMProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BD2A2CB83900E8810E /* LLMProvider.swift */; };
+		8B75A1CD2A2CB83900E8810E /* LLMProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1BD2A2CB83900E8810E /* LLMProvider.swift */; };
+		8B75A1CF2A2CB8DC00E8810E /* LLMConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1CE2A2CB8DC00E8810E /* LLMConfigView.swift */; };
+		8B75A1D02A2CB8DC00E8810E /* LLMConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1CE2A2CB8DC00E8810E /* LLMConfigView.swift */; };
+		8B75A1D12A2CB8DC00E8810E /* LLMConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1CE2A2CB8DC00E8810E /* LLMConfigView.swift */; };
+		8B75A1D22A2CB8DC00E8810E /* LLMConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75A1CE2A2CB8DC00E8810E /* LLMConfigView.swift */; };
 		8B82463429B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82463329B1F49F0069B8F7 /* ChatGPTAPIModels.swift */; };
 		8B82463529B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82463329B1F49F0069B8F7 /* ChatGPTAPIModels.swift */; };
 		8B82463629B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82463329B1F49F0069B8F7 /* ChatGPTAPIModels.swift */; };
@@ -107,6 +131,11 @@
 		8B612E2229D68CC9008DF5AF /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		8B612E2329D68CC9008DF5AF /* TokenizerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenizerView.swift; sourceTree = "<group>"; };
 		8B612E2429D68CC9008DF5AF /* TokenizerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenizerViewModel.swift; sourceTree = "<group>"; };
+		8B75A1BA2A2CB83900E8810E /* LLMClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLMClient.swift; sourceTree = "<group>"; };
+		8B75A1BB2A2CB83900E8810E /* PaLMChatAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaLMChatAPI.swift; sourceTree = "<group>"; };
+		8B75A1BC2A2CB83900E8810E /* LLMConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLMConfig.swift; sourceTree = "<group>"; };
+		8B75A1BD2A2CB83900E8810E /* LLMProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLMProvider.swift; sourceTree = "<group>"; };
+		8B75A1CE2A2CB8DC00E8810E /* LLMConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMConfigView.swift; sourceTree = "<group>"; };
 		8B82463329B1F49F0069B8F7 /* ChatGPTAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTAPIModels.swift; sourceTree = "<group>"; };
 		8B91C000298AD09E0079AF26 /* XCAChatGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XCAChatGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B91C003298AD09E0079AF26 /* XCAChatGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCAChatGPTApp.swift; sourceTree = "<group>"; };
@@ -129,6 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B75A1B42A2CB7D200E8810E /* GoogleGenerativeAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B75A1B62A2CB7D500E8810E /* GoogleGenerativeAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B75A1B82A2CB7DA00E8810E /* GoogleGenerativeAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +185,7 @@
 				8B612E2A29D68CE3008DF5AF /* GPTEncoder in Frameworks */,
 				8BC0F8D329F157E600D6B492 /* Highlighter in Frameworks */,
 				8BC0F8D029F157C800D6B492 /* Markdown in Frameworks */,
+				8B75A1B12A2CB7C600E8810E /* GoogleGenerativeAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +214,7 @@
 		8B057591298E52CB00A56C9A /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				8B75A1B92A2CB81400E8810E /* LLM Provider */,
 				8B91C011298AD0CE0079AF26 /* ChatGPTAPI.swift */,
 				8B82463329B1F49F0069B8F7 /* ChatGPTAPIModels.swift */,
 				8B91C005298AD09E0079AF26 /* ContentView.swift */,
@@ -192,6 +226,7 @@
 				8BC0F8D629F1583300D6B492 /* ParserResult.swift */,
 				8BC0F8DB29F1587600D6B492 /* ResponseParsingTask.swift */,
 				8BC0F8DD29F1589600D6B492 /* CodeBlockView.swift */,
+				8B75A1CE2A2CB8DC00E8810E /* LLMConfigView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -233,6 +268,24 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		8B75A1B22A2CB7CE00E8810E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8B75A1B92A2CB81400E8810E /* LLM Provider */ = {
+			isa = PBXGroup;
+			children = (
+				8B75A1BA2A2CB83900E8810E /* LLMClient.swift */,
+				8B75A1BC2A2CB83900E8810E /* LLMConfig.swift */,
+				8B75A1BD2A2CB83900E8810E /* LLMProvider.swift */,
+				8B75A1BB2A2CB83900E8810E /* PaLMChatAPI.swift */,
+			);
+			path = "LLM Provider";
+			sourceTree = "<group>";
+		};
 		8B91BFF7298AD09E0079AF26 = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +295,7 @@
 				8B0575F4298FA9D800A56C9A /* XCAChatGPTWatch Watch App */,
 				8B057612298FBDB600A56C9A /* XCAChatGPTTV */,
 				8B91C001298AD09E0079AF26 /* Products */,
+				8B75A1B22A2CB7CE00E8810E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -294,6 +348,9 @@
 			dependencies = (
 			);
 			name = XCAChatGPTMac;
+			packageProductDependencies = (
+				8B75A1B32A2CB7D200E8810E /* GoogleGenerativeAI */,
+			);
 			productName = XCAChatGPTMac;
 			productReference = 8B057582298E52C000A56C9A /* XCAChatGPTMac.app */;
 			productType = "com.apple.product-type.application";
@@ -328,6 +385,9 @@
 			dependencies = (
 			);
 			name = "XCAChatGPTWatch Watch App";
+			packageProductDependencies = (
+				8B75A1B52A2CB7D500E8810E /* GoogleGenerativeAI */,
+			);
 			productName = "XCAChatGPTWatch Watch App";
 			productReference = 8B0575F0298FA9D800A56C9A /* XCAChatGPTWatch Watch App.app */;
 			productType = "com.apple.product-type.application";
@@ -345,6 +405,9 @@
 			dependencies = (
 			);
 			name = XCAChatGPTTV;
+			packageProductDependencies = (
+				8B75A1B72A2CB7DA00E8810E /* GoogleGenerativeAI */,
+			);
 			productName = XCAChatGPTTV;
 			productReference = 8B057611298FBDB600A56C9A /* XCAChatGPTTV.app */;
 			productType = "com.apple.product-type.application";
@@ -366,6 +429,7 @@
 				8B612E2929D68CE3008DF5AF /* GPTEncoder */,
 				8BC0F8CF29F157C800D6B492 /* Markdown */,
 				8BC0F8D229F157E600D6B492 /* Highlighter */,
+				8B75A1B02A2CB7C600E8810E /* GoogleGenerativeAI */,
 			);
 			productName = XCAChatGPT;
 			productReference = 8B91C000298AD09E0079AF26 /* XCAChatGPT.app */;
@@ -411,6 +475,7 @@
 				8B612E2829D68CE3008DF5AF /* XCRemoteSwiftPackageReference "GPTEncoder" */,
 				8BC0F8CE29F157C800D6B492 /* XCRemoteSwiftPackageReference "swift-markdown" */,
 				8BC0F8D129F157E600D6B492 /* XCRemoteSwiftPackageReference "HighlighterSwift" */,
+				8B75A1AF2A2CB7C600E8810E /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
 			);
 			productRefGroup = 8B91C001298AD09E0079AF26 /* Products */;
 			projectDirPath = "";
@@ -476,13 +541,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B75A1D02A2CB8DC00E8810E /* LLMConfigView.swift in Sources */,
 				8B057597298E52DD00A56C9A /* MessageRow.swift in Sources */,
+				8B75A1CB2A2CB83900E8810E /* LLMProvider.swift in Sources */,
 				8B057593298E52D900A56C9A /* ChatGPTAPI.swift in Sources */,
+				8B75A1C32A2CB83900E8810E /* PaLMChatAPI.swift in Sources */,
 				8B82463529B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */,
 				8BC0F8D829F1583300D6B492 /* ParserResult.swift in Sources */,
+				8B75A1BF2A2CB83900E8810E /* LLMClient.swift in Sources */,
 				8B057594298E52D900A56C9A /* ContentView.swift in Sources */,
 				8B057592298E52D900A56C9A /* DotLoadingView.swift in Sources */,
 				8B057595298E52D900A56C9A /* MessageRowView.swift in Sources */,
+				8B75A1C72A2CB83900E8810E /* LLMConfig.swift in Sources */,
 				8B057585298E52C000A56C9A /* XCAChatGPTMacApp.swift in Sources */,
 				8B057596298E52DD00A56C9A /* ViewModel.swift in Sources */,
 			);
@@ -492,13 +562,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B75A1D12A2CB8DC00E8810E /* LLMConfigView.swift in Sources */,
 				8B057608298FA9E900A56C9A /* DotLoadingView.swift in Sources */,
+				8B75A1CC2A2CB83900E8810E /* LLMProvider.swift in Sources */,
 				8B057606298FA9E900A56C9A /* MessageRowView.swift in Sources */,
+				8B75A1C42A2CB83900E8810E /* PaLMChatAPI.swift in Sources */,
 				8B82463629B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */,
 				8BC0F8D929F1583300D6B492 /* ParserResult.swift in Sources */,
+				8B75A1C02A2CB83900E8810E /* LLMClient.swift in Sources */,
 				8B057609298FA9E900A56C9A /* MessageRow.swift in Sources */,
 				8B057605298FA9E900A56C9A /* ContentView.swift in Sources */,
 				8B05760A298FA9E900A56C9A /* ChatGPTAPI.swift in Sources */,
+				8B75A1C82A2CB83900E8810E /* LLMConfig.swift in Sources */,
 				8B057607298FA9E900A56C9A /* ViewModel.swift in Sources */,
 				8B0575F6298FA9D800A56C9A /* XCAChatGPTWatchApp.swift in Sources */,
 			);
@@ -512,12 +587,17 @@
 				8B057622298FBE0400A56C9A /* MessageRowView.swift in Sources */,
 				8B82463729B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */,
 				8BC0F8DA29F1583300D6B492 /* ParserResult.swift in Sources */,
+				8B75A1CD2A2CB83900E8810E /* LLMProvider.swift in Sources */,
+				8B75A1C92A2CB83900E8810E /* LLMConfig.swift in Sources */,
+				8B75A1C52A2CB83900E8810E /* PaLMChatAPI.swift in Sources */,
 				8B05761F298FBE0400A56C9A /* ChatGPTAPI.swift in Sources */,
 				8B057623298FBE0400A56C9A /* DotLoadingView.swift in Sources */,
 				8B057614298FBDB600A56C9A /* XCAChatGPTTVApp.swift in Sources */,
 				8B05764829909A9200A56C9A /* ScrollView.swift in Sources */,
 				8B057620298FBE0400A56C9A /* ContentView.swift in Sources */,
+				8B75A1C12A2CB83900E8810E /* LLMClient.swift in Sources */,
 				8B057624298FBE0400A56C9A /* ViewModel.swift in Sources */,
+				8B75A1D22A2CB8DC00E8810E /* LLMConfigView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +608,8 @@
 				8B91C012298AD0CE0079AF26 /* ChatGPTAPI.swift in Sources */,
 				8B91C006298AD09E0079AF26 /* ContentView.swift in Sources */,
 				8BC0F8DC29F1587600D6B492 /* ResponseParsingTask.swift in Sources */,
+				8B75A1C62A2CB83900E8810E /* LLMConfig.swift in Sources */,
+				8B75A1CF2A2CB8DC00E8810E /* LLMConfigView.swift in Sources */,
 				8B612E2629D68CC9008DF5AF /* TokenizerView.swift in Sources */,
 				8B612E2729D68CC9008DF5AF /* TokenizerViewModel.swift in Sources */,
 				8B82463429B1F49F0069B8F7 /* ChatGPTAPIModels.swift in Sources */,
@@ -536,9 +618,12 @@
 				8BC0F8D729F1583300D6B492 /* ParserResult.swift in Sources */,
 				8B91C018298ADF4E0079AF26 /* DotLoadingView.swift in Sources */,
 				8B91C004298AD09E0079AF26 /* XCAChatGPTApp.swift in Sources */,
+				8B75A1C22A2CB83900E8810E /* PaLMChatAPI.swift in Sources */,
 				8B612E2529D68CC9008DF5AF /* TextView.swift in Sources */,
 				8B91C01A298ADF7F0079AF26 /* MessageRowView.swift in Sources */,
 				8BC0F8D529F1581800D6B492 /* MarkdownAttributedStringParser.swift in Sources */,
+				8B75A1BE2A2CB83900E8810E /* LLMClient.swift in Sources */,
+				8B75A1CA2A2CB83900E8810E /* LLMProvider.swift in Sources */,
 				8B91C016298ADC9D0079AF26 /* MessageRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -998,6 +1083,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		8B75A1AF2A2CB7C600E8810E /* XCRemoteSwiftPackageReference "generative-ai-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/generative-ai-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 		8BC0F8CE29F157C800D6B492 /* XCRemoteSwiftPackageReference "swift-markdown" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-markdown";
@@ -1021,6 +1114,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B612E2829D68CE3008DF5AF /* XCRemoteSwiftPackageReference "GPTEncoder" */;
 			productName = GPTEncoder;
+		};
+		8B75A1B02A2CB7C600E8810E /* GoogleGenerativeAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B75A1AF2A2CB7C600E8810E /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			productName = GoogleGenerativeAI;
+		};
+		8B75A1B32A2CB7D200E8810E /* GoogleGenerativeAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B75A1AF2A2CB7C600E8810E /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			productName = GoogleGenerativeAI;
+		};
+		8B75A1B52A2CB7D500E8810E /* GoogleGenerativeAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B75A1AF2A2CB7C600E8810E /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			productName = GoogleGenerativeAI;
+		};
+		8B75A1B72A2CB7DA00E8810E /* GoogleGenerativeAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B75A1AF2A2CB7C600E8810E /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			productName = GoogleGenerativeAI;
 		};
 		8BC0F8CF29F157C800D6B492 /* Markdown */ = {
 			isa = XCSwiftPackageProductDependency;

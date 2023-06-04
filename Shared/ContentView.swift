@@ -16,7 +16,7 @@ struct ContentView: View {
     
     var body: some View {
         chatListView
-            .navigationTitle("XCA ChatGPT")
+            .navigationTitle(vm.navigationTitle)
     }
     
     var chatListView: some View {
@@ -66,13 +66,14 @@ struct ContentView: View {
             }
             
             TextField("Send message", text: $vm.inputMessage, axis: .vertical)
+                .autocorrectionDisabled()
                 #if os(iOS) || os(macOS)
                 .textFieldStyle(.roundedBorder)
                 #endif
                 .focused($isTextFieldFocused)
-                .disabled(vm.isInteractingWithChatGPT)
+                .disabled(vm.isInteracting)
             
-            if vm.isInteractingWithChatGPT {
+            if vm.isInteracting {
                 #if os(iOS)
                 Button {
                     vm.cancelStreamingResponse()
@@ -122,3 +123,4 @@ struct ContentView_Previews: PreviewProvider {
         }
     }
 }
+

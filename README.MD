@@ -1,8 +1,8 @@
-# ChatGPT SwiftUI iOS, macOS, watchOS, tvOS App
+# PaLMChat & ChatGPT SwiftUI iOS, macOS, watchOS, tvOS App
 
-![Alt text](https://imagizer.imageshack.com/v2/640x480q90/922/hmlopw.png "image")
+![Alt text](https://imagizer.imageshack.com/v2/640x480q70/924/4Qgrta.jpg "image")
 
-This is a native iOS, macOS, watchOS, tvOS App for interacting with ChatGPT built using SwiftUI and OpenAPI API. It's using Official ChatGPT endpoint with `gpt-3.5-turbo` model.
+This is a native iOS, macOS, watchOS, tvOS App for interacting with PaLM API & ChatGPT LLM Chatbots built using SwiftUI, OpenAPI Official ChatGPT API, & Google Generative AI SDK SPM.
 
 It is also able to render response with markdown and code syntax highlighting.
 
@@ -16,8 +16,7 @@ It is also able to render response with markdown and code syntax highlighting.
 ## Requirements
 - Xcode 14 
 - Register at openai.com/api
-- Create API Key
-- Paste API key in ContentView where the ChatGPTAPI instance is declared
+- Create API Key from either OpenAI or PaLM API MakerSuite
 
 ## ChatGPTSwift API Lib
 You can use this standalone api client to access ChatGPT API, you can add dependency for [ChatGPTSwift](https://github.com/alfianlosari/ChatGPTSwift) to access the API only if you want to integrate into your own app.
