@@ -98,22 +98,23 @@ class ChatGPTAPI: LLMClient, @unchecked Sendable {
             
             throw "Bad Response: \(httpResponse.statusCode), \(errorText)"
         }
-        
-        var responseText = ""
-        return AsyncThrowingStream { [weak self] in
-            guard let self else { return nil }
-            for try await line in result.lines {
-                try Task.checkCancellation()
-                if line.hasPrefix("data: "),
-                   let data = line.dropFirst(6).data(using: .utf8),
-                   let response = try? self.jsonDecoder.decode(StreamCompletionResponse.self, from: data),
-                   let text = response.choices.first?.delta.content {
-                    responseText += text
-                    return text
+
+        return AsyncThrowingStream { continuation in
+            Task {
+                var responseText = ""
+                for try await line in result.lines {
+                    try Task.checkCancellation()
+                    if line.hasPrefix("data: "),
+                       let data = line.dropFirst(6).data(using: .utf8),
+                       let response = try? self.jsonDecoder.decode(StreamCompletionResponse.self, from: data),
+                       let text = response.choices.first?.delta.content {
+                        responseText += text
+                        continuation.yield(text)
+                    }
                 }
+                self.appendToHistoryList(userText: text, responseText: responseText)
+                continuation.finish()
             }
-            self.appendToHistoryList(userText: text, responseText: responseText)
-            return nil
         }
     }
 
