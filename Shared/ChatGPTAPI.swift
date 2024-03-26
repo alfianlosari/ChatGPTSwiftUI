@@ -100,9 +100,19 @@ class ChatGPTAPI: LLMClient, @unchecked Sendable {
         }
         
         var responseText = ""
+        let streams: AsyncThrowingStream<String, Error> = AsyncThrowingStream { continuation in
+            Task {
+                for try await line in result.lines {
+                    try Task.checkCancellation()
+                    continuation.yield(line)
+                }
+                continuation.finish()
+            }
+        }
+        
         return AsyncThrowingStream { [weak self] in
             guard let self else { return nil }
-            for try await line in result.lines {
+            for try await line in streams {
                 try Task.checkCancellation()
                 if line.hasPrefix("data: "),
                    let data = line.dropFirst(6).data(using: .utf8),
