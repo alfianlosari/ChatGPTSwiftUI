@@ -102,11 +102,15 @@ class ChatGPTAPI: LLMClient, @unchecked Sendable {
         var responseText = ""
         let streams: AsyncThrowingStream<String, Error> = AsyncThrowingStream { continuation in
             Task {
-                for try await line in result.lines {
-                    try Task.checkCancellation()
-                    continuation.yield(line)
+                do {
+                    for try await line in result.lines {
+                        try Task.checkCancellation()
+                        continuation.yield(line)
+                    }
+                    continuation.finish()
+                } catch {
+                    continuation.finish(throwing: error)
                 }
-                continuation.finish()
             }
         }
         
