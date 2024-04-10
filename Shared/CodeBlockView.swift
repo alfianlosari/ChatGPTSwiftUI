@@ -82,7 +82,7 @@ struct CodeBlockView_Previews: PreviewProvider {
     
     static var markdownString = """
     ```swift
-    let api = ChatGPTAPI(apiKey: "API_KEY")
+    let api = ChatGPTAPI(apiKey: "PROVIDE-API-KEY")
 
     Task {
         do {

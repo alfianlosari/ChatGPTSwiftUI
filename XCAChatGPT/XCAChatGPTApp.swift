@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct XCAChatGPTApp: App {
     
-    @StateObject var vm = ViewModel(api: ChatGPTAPI(apiKey: "PROVIDE_API_KEY"))
+    @StateObject var vm = ViewModel(api: ChatGPTAPI())
     @State var isShowingTokenizer = false
     @State var llmConfig: LLMConfig?
     
